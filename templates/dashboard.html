@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">📊 Admin Dashboard</h2>
+
+    <div class="row">
+
+        <!-- Total Users Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0" style="border-radius: 15px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-muted">Total Users</h5>
+                    <h1 class="display-4 fw-bold text-primary">
+                        {{ total_users }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Used Requests Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0" style="border-radius: 15px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-muted">Total Used Requests</h5>
+                    <h1 class="display-4 fw-bold text-success">
+                        {{ total_used_requests }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+   
+
+</div>
+
+{% endblock %}

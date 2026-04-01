@@ -1,0 +1,107 @@
+<!-- chat/templates/chat/dashboard.html -->
+{% extends "customer/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+
+    <div class="card p-3 mb-4">
+        <h5>Data Storage Setting</h5>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="storeToggle"
+                {% if bot.store_data %}checked{% endif %}>
+            <label class="form-check-label">
+                Store User Chat Data
+            </label>
+        </div>
+    </div>
+
+
+    <script>
+document.getElementById("storeToggle").addEventListener("change", function() {
+    let status = this.checked;
+
+    fetch("/toggle-store-data/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({
+            status: status
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Updated:", data);
+    });
+});
+</script>
+
+
+
+    <!-- Cards Row -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary p-3">
+                <h5>Total Users</h5>
+                <h2>{{ total_users }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success p-3">
+                <h5>Total Chats</h5>
+                <h2>{{ total_chats }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning p-3">
+                <h5>Chats Today</h5>
+                <h2>{{ chats_today }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Progress Chart -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card p-3">
+                <h5>Daily Chat Progress</h5>
+                <canvas id="chatChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const ctx = document.getElementById('chatChart').getContext('2d');
+const chatChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ chat_dates|safe }},  // ["2026-03-25", "2026-03-26", ...]
+        datasets: [{
+            label: 'Chats per Day',
+            data: {{ chat_counts|safe }},  // [5, 12, 7, ...]
+            backgroundColor: 'rgba(30, 60, 114, 0.2)',
+            borderColor: 'rgba(30, 60, 114, 1)',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                stepSize: 1
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

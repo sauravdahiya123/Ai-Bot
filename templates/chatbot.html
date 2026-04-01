@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Chatbot</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+/* FLOAT BUTTON */
+#openChat {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* CHAT PANEL */
+#chatbox {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: #111;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+#chatbox.active {
+    right: 0;
+}
+
+/* HEADER */
+#chatHeader {
+    background: #222;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* MESSAGES */
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.user {
+    background: #007bff;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: right;
+}
+
+.bot {
+    background: #333;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+/* INPUT AREA */
+#inputArea {
+    display: flex;
+}
+
+#inputArea input {
+    flex: 1;
+    padding: 10px;
+}
+
+#inputArea button {
+    padding: 10px;
+}
+</style>
+
+
+<style>
+/* ADD THIS */
+
+.sales-box {
+    background: #222;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.sales-box button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.yes-btn {
+    background: green;
+    color: white;
+}
+
+.no-btn {
+    background: red;
+    color: white;
+}
+</style>
+</style>
+
+</head>
+<body>
+
+<!-- FLOAT BUTTON -->
+<div id="openChat" onclick="toggleChat()">💬</div>
+
+<!-- CHATBOX -->
+<div id="chatbox">
+    
+    <div id="chatHeader">
+        <span>Chatbot</span>
+        <button onclick="toggleChat()">X</button>
+    </div>
+
+    <div id="messages"></div>
+
+    <div id="inputArea">
+        <input id="question" placeholder="Ask something"/>
+        <button onclick="ask()">Send</button>
+        <button onclick="startVoice()">🎤</button>
+    </div>
+</div>
+<script>
+
+
+// 🔥 AUTO API KEY (Django se aayega)
+
+// 🔥 VISITOR ID (tracking ke liye)
+
+
+function handleSalesResponse(choice,box){
+    if(box){
+        box.remove();
+    }
+
+    if(choice === "Yes"){
+        addMessage("bot", "Great! Our sales team will contact you soon.");
+        
+        // 👉 optional API call
+        fetch("http://127.0.0.1:8001/connect-sales", {
+            method: "POST"
+        });
+
+    } else {
+        addMessage("bot", "No problem 😊 Feel free to continue asking!");
+    }
+}
+</script>
+<style>
+#userForm {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    background: #1e1e2f;
+    color: #fff;
+    border-radius: 12px;
+    z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#userForm .header {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#userForm .body {
+    padding: 15px;
+}
+
+#userForm input,
+#userForm textarea {
+    width: 93%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+#userForm textarea {
+    resize: none;
+    height: 70px;
+}
+
+#userForm button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#userForm button:hover {
+    opacity: 0.9;
+}
+</style>
+
+<div id="userForm">
+
+    <div class="header">
+        👤 User Details
+    </div>
+
+    <div class="body">
+        <input id="name" placeholder="Enter your name">
+        <input id="email" placeholder="Enter your email">
+        <input id="phone" placeholder="Enter mobile number">
+        <input id="location" placeholder="Your location">
+        <textarea id="message" placeholder="Your message..."></textarea>
+
+        <button onclick="submitForm()">Start Chat</button>
+    </div>
+
+</div>
+
+<script>
+
+// 🔥 ye backend se bhejo (Django template)
+
+let formSubmitted = localStorage.getItem("form_submitted");
+
+
+</script>
+
+<script>
+
+function submitForm(){
+
+    let data = {
+        api_key: API_KEY,
+        visitor_id: visitor_id,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        location: document.getElementById("location").value,
+        message: document.getElementById("message").value
+    };
+
+    fetch("http://127.0.0.1:8000/api/save-visitor/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if(res.status === "success"){
+            localStorage.setItem("form_submitted", "true");
+
+            document.getElementById("userForm").style.display = "none";
+            // document.getElementById("chatUI").style.display = "block";
+            document.getElementById("chatbox").classList.toggle("active");
+            addMessage("bot", "Thanks! How can I help you?");
+        }
+    });
+
+}
+
+</script>
+
+<script>
+function showSalesOptions(message, options){
+    let div = document.getElementById("messages");
+
+    let box = document.createElement("div");
+    box.className = "sales-box";
+
+    let text = document.createElement("div");
+    text.innerText = message;
+    box.appendChild(text);
+
+    options.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+
+        if(opt === "Yes") btn.className = "yes-btn";
+        else btn.className = "no-btn";
+
+        btn.onclick = () => handleSalesResponse(opt,box);
+
+        box.appendChild(btn);
+    });
+
+    div.appendChild(box);
+    div.scrollTop = div.scrollHeight;
+}
+</script>
+
+<script>
+
+// 🔥 AUTO API KEY (Django se inject hoga)
+let API_KEY = "{{ api_key }}"; // 👈 important
+let STORE_DATA = {{ store_data|yesno:"true,false" }};
+
+console.log("STORE_DATA0",STORE_DATA);
+let visitor_id = localStorage.getItem("visitor_id");
+
+if (!visitor_id) {
+    visitor_id = crypto.randomUUID();
+    localStorage.setItem("visitor_id", visitor_id);
+}
+
+console.log("Visitor ID:", visitor_id);
+
+// 🔥 OPEN / CLOSE CHAT
+function toggleChat(){
+
+    let chat = document.getElementById("chatbox");
+    chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+
+    // 🔥 condition
+    if(STORE_DATA && !formSubmitted){
+        document.getElementById("userForm").style.display = "block";
+        // document.getElementById("chatUI").style.display = "none";
+    } else {
+        document.getElementById("userForm").style.display = "none";
+    document.getElementById("chatbox").classList.toggle("active");
+    }
+
+
+}
+
+// 🔥 ADD MESSAGE UI
+function addMessage(type, text){
+    let div = document.getElementById("messages");
+    let msg = document.createElement("div");
+    msg.className = type;
+    msg.innerText = text;
+    div.appendChild(msg);
+    div.scrollTop = div.scrollHeight;
+}
+
+// 🔥 ASK API (FastAPI)
+var count  = 0;
+async function ask(){
+    count++;
+    let input = document.getElementById("question");
+    let q = input.value.trim();
+
+    if(q === "") return;
+
+    addMessage("user", q);
+    input.value = "";
+
+    let res = await fetch(`http://127.0.0.1:8001/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
+    let data = await res.json();
+
+    addMessage("bot", data.answer);
+    if(count == 5){
+        showSalesOptions(data.sales_message, data.options);
+    }
+}
+
+// ✅ ENTER PRESS SUPPORT
+document.getElementById("question").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        ask();
+    }
+});
+
+// 🎤 VOICE INPUT
+function startVoice() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.onresult = function(event) {
+        document.getElementById("question").value = event.results[0][0].transcript;
+        ask();
+    };
+    recognition.start();
+}
+
+</script>
+
+</body>
+</html>
