@@ -1,0 +1,82 @@
+{% extends "customer/base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold">
+        <i class="fa-solid fa-comments me-2 text-primary"></i>
+        Add Question & Answer
+    </h4>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-sm border-0 rounded-4 p-4">
+
+                <h5 class="mb-3 fw-semibold">Add Question & Answer</h5>
+                <p class="text-muted mb-4">Train your chatbot by adding custom Q&A.</p>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- URL -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Select URL</label>
+                        <select name="url_id" class="form-select rounded-3" required>
+                            <option value="">-- Choose URL --</option>
+                            {% for url in urls %}
+                                <option value="{{ url.id }}">{{ url.url }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Question -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Question</label>
+                        <textarea name="question" rows="3" class="form-control rounded-3" placeholder="Enter question..." required></textarea>
+                    </div>
+
+                    <!-- Answer -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Answer</label>
+                        <textarea name="answer" rows="4" class="form-control rounded-3" placeholder="Enter answer..." required></textarea>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3">
+                            💾 Save Q&A
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- 🔥 Extra Styling -->
+<style>
+.card {
+    transition: 0.3s;
+}
+.card:hover {
+    transform: translateY(-3px);
+}
+
+textarea:focus, select:focus {
+    box-shadow: none !important;
+    border-color: #0d6efd;
+}
+</style>
+
+{% endblock %}

@@ -155,7 +155,7 @@ function handleSalesResponse(choice,box){
         addMessage("bot", "Great! Our sales team will contact you soon.");
         
         // 👉 optional API call
-        fetch("http://127.0.0.1:8001/connect-sales", {
+        fetch("http://backbotv1.borgdesk.com/connect-sales", {
             method: "POST"
         });
 
@@ -266,7 +266,7 @@ function submitForm(){
         message: document.getElementById("message").value
     };
 
-    fetch("http://127.0.0.1:8000/api/save-visitor/", {
+    fetch("http://backbotv1.borgdesk.com/api/save-visitor/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -323,7 +323,7 @@ function showSalesOptions(message, options){
 let API_KEY = "{{ api_key }}"; // 👈 important
 let STORE_DATA = {{ store_data|yesno:"true,false" }};
 
-console.log("STORE_DATA0",STORE_DATA);
+console.log("STORE_DATA",STORE_DATA);
 let visitor_id = localStorage.getItem("visitor_id");
 
 if (!visitor_id) {
@@ -373,7 +373,7 @@ async function ask(){
     addMessage("user", q);
     input.value = "";
 
-    let res = await fetch(`http://127.0.0.1:8001/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
+    let res = await fetch(`http://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
     let data = await res.json();
 
     addMessage("bot", data.answer);

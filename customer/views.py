@@ -101,3 +101,15 @@ def toggle_store_data(request):
             })
 
     return JsonResponse({"status": "error"})
+
+
+
+def customer_setting(request):
+    dashboard_user = User.objects.get(auth_user=request.user)
+    bot = CustomerBot.objects.filter(customer=dashboard_user).first()
+
+    return render(request, "customer/settings.html", {
+
+        "bot":bot,
+        "user_id":request.user.id
+    })

@@ -1,7 +1,7 @@
 import razorpay
 from django.conf import settings
 from django.http import JsonResponse
-from .models import User, Payment , Visitor
+from .models import User, Payment , Visitor , ChatQA
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -95,7 +95,7 @@ from django.http import JsonResponse
 from .models import User, UserURL
 
 # 🔥 FastAPI URL
-FASTAPI_CRAWL = "http://127.0.0.1:8001/crawl"
+FASTAPI_CRAWL = "http://backbotv1.borgdesk.com/crawl"
 # def add_url(request):
 #     body = json.loads(request.body)
 
@@ -138,7 +138,7 @@ def add_url_page(request):
             UserURL.objects.create(user=user, url=url)
 
         # FastAPI call
-        requests.post("http://127.0.0.1:8001/crawl", json={
+        requests.post(FASTAPI_CRAWL, json={
             "user_id": str(user.id),
             "urls": [url]
         })
@@ -332,3 +332,57 @@ def save_visitor(request):
         )
 
         return JsonResponse({"status": "success"})
+    
+
+
+
+@login_required
+def save_qa(request):
+    user = request.user
+
+    # user ke URLs
+    dashboard_user = User.objects.get(auth_user=request.user)
+    urls = UserURL.objects.filter(user=dashboard_user)
+
+    if request.method == "POST":
+        url_id = request.POST.get("url_id")
+        question = request.POST.get("question")
+        answer = request.POST.get("answer")
+
+        try:
+            url_obj = UserURL.objects.get(id=url_id, user=dashboard_user)
+
+            ChatQA.objects.create(
+                customer=dashboard_user,
+                url=url_obj,
+                question=question,
+                answer=answer
+            )
+
+            return redirect("save_qa")  # same page reload
+
+        except UserURL.DoesNotExist:
+            pass
+
+    return render(request, "customer/save_qa.html", {"urls": urls})
+
+
+from django.db.models import Q
+def get_qa(request):
+    user_id = request.GET.get("user_id")
+    question = request.GET.get("question")
+
+    results = ChatQA.objects.filter(
+        customer_id=user_id
+    ).filter(
+        Q(question__icontains=question)
+    )[:5]
+
+    data = []
+    for qa in results:
+        data.append({
+            "question": qa.question,
+            "answer": qa.answer
+        })
+
+    return JsonResponse({"results": data})

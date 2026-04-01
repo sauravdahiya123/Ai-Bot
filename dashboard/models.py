@@ -85,3 +85,15 @@ class Visitor(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+class ChatQA(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)  # Customer who owns the bot
+    url = models.ForeignKey(UserURL, on_delete=models.CASCADE, null=True, blank=True)  # 🔥 connection
+    question = models.TextField()
+    answer = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question[:50]

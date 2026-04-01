@@ -6,4 +6,5 @@ urlpatterns = [
     path("update-usage/", views.update_usage),
     path('save-chat/', views.save_chat, name='save_chat'),
     path("save-visitor/", views.save_visitor,name='save_visitor'),
+    path("get-qa/", views.get_qa,name='get_qa'),
 ]

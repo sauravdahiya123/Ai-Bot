@@ -33,5 +33,5 @@ urlpatterns = [
     path("logout/", views.admin_logout, name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path('toggle-store-data/', toggle_store_data, name='toggle_store_data'),
-    
+
 ]
