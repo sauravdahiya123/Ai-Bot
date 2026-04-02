@@ -1,0 +1,137 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white">
+            <h4>Chat QA List</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- 🔍 Search + Filter -->
+            <form method="get" class="row mb-3">
+                <div class="col-md-5">
+                    <input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="Search question/answer">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="url_id" value="{{ request.GET.url_id }}" class="form-control" placeholder="URL ID">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+
+            <!-- 📊 Table -->
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>URL</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for qa in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>{{ qa.question|truncatechars:50 }}</td>
+
+                        <td>
+                            <button class="btn btn-sm btn-info" onclick="showAnswer('{{ qa.answer|escapejs }}')">
+                                View
+                            </button>
+                        </td>
+
+                        <td>
+                            {% if qa.url %}
+                                {{ qa.url.url }}
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ qa.created_at|date:"d M Y H:i" }}</td>
+
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteQA({{ qa.id }})">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No Data Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- 📄 Pagination -->
+            <nav>
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- 📩 Answer Modal -->
+<div class="modal fade" id="answerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5>Answer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modalAnswer"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showAnswer(ans){
+    document.getElementById('modalAnswer').innerText = ans;
+    var modal = new bootstrap.Modal(document.getElementById('answerModal'));
+    modal.show();
+}
+
+function deleteQA(id){
+    if(confirm("Delete this QA?")){
+        fetch(`/chatqa/delete/${id}/`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'success'){
+                location.reload();
+            }
+        });
+    }
+}
+</script>
+
+{% endblock %}

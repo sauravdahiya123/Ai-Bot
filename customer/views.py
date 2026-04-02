@@ -103,7 +103,6 @@ def toggle_store_data(request):
     return JsonResponse({"status": "error"})
 
 
-
 def customer_setting(request):
     dashboard_user = User.objects.get(auth_user=request.user)
     bot = CustomerBot.objects.filter(customer=dashboard_user).first()
@@ -111,5 +110,182 @@ def customer_setting(request):
     return render(request, "customer/settings.html", {
 
         "bot":bot,
-        "user_id":request.user.id
+        "user_id":dashboard_user.id
     })
+
+
+from django.shortcuts import render ,  get_object_or_404
+from dashboard.models import Visitor
+from django.core.paginator import Paginator
+
+def visitor_list(request):
+    search = request.GET.get('search')
+    bot_id = request.GET.get('bot_id')
+
+    visitors = Visitor.objects.filter(
+        bot__customer__auth_user=request.user
+    ).order_by('-created_at')
+
+    if bot_id:
+        visitors = visitors.filter(bot_id=bot_id)
+
+    if search:
+        visitors = visitors.filter(
+            name__icontains=search
+        ) | visitors.filter(
+            email__icontains=search
+        ) | visitors.filter(
+            phone__icontains=search
+        )
+
+    paginator = Paginator(visitors, 10)  # 10 per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/visitor_list.html', {
+        'page_obj': page_obj
+    })
+
+
+# DELETE (AJAX)
+def delete_visitor(request, id):
+    visitor = get_object_or_404(Visitor, id=id)
+    visitor.delete()
+    return JsonResponse({'status': 'success'})
+
+
+@login_required
+def chatqa_list(request):
+    search = request.GET.get('search')
+    url_id = request.GET.get('url_id')
+
+    # 🔐 Only current user data
+    qas = ChatQA.objects.filter(customer__auth_user=request.user.id).order_by('-created_at')
+
+    # 🔎 Filter by URL
+    if url_id:
+        qas = qas.filter(url_id=url_id)
+
+    # 🔍 Search
+    if search:
+        qas = qas.filter(
+            Q(question__icontains=search) |
+            Q(answer__icontains=search)
+        )
+
+    # 📄 Pagination
+    paginator = Paginator(qas, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/chatqa_list.html', {
+        'page_obj': page_obj
+    })
+
+
+# ❌ Delete
+def delete_chatqa(request, id):
+    qa = get_object_or_404(ChatQA, id=id, customer__auth_user=request.user.id)
+    qa.delete()
+    return JsonResponse({'status': 'success'})
+
+
+@login_required
+def update_bot_language(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        bot_id = data.get('bot_id')
+        language = data.get('language')
+
+        try:
+            bot = CustomerBot.objects.get(id=bot_id, customer__auth_user=request.user)
+            bot.language = language
+            bot.save()
+
+            return JsonResponse({"status": "success"})
+        except CustomerBot.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Bot not found"})
+
+    return JsonResponse({"status": "error"})
+
+
+def get_bot_language(bot_id):
+    from .models import CustomerBot
+    try:
+        bot = CustomerBot.objects.get(id=bot_id)
+        return bot.language
+    except:
+        return 'en'
+    
+
+from django.db.models import Q
+
+
+@login_required
+def chat_history_view(request):
+    bot_id = request.GET.get('bot_id')
+    visitor_id = request.GET.get('visitor_id')
+    search = request.GET.get('search')
+
+    one_day_ago = timezone.now() - timedelta(days=1)
+
+    chats = ChatHistory.objects.filter(
+        created_at__gte=one_day_ago,
+        session__bot__customer__auth_user=request.user
+    )
+
+    # 🔎 Filters
+    if bot_id:
+        chats = chats.filter(session__bot_id=bot_id)
+
+    if visitor_id:
+        chats = chats.filter(session__visitor_id__icontains=visitor_id)
+
+    if search:
+        chats = chats.filter(
+            Q(question__icontains=search) |
+            Q(answer__icontains=search)
+        )
+
+    chats = chats.select_related('session', 'session__bot').order_by('-created_at')
+
+    # 📄 Pagination
+    paginator = Paginator(chats, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 🔗 bots for dropdown
+    bots = CustomerBot.objects.filter(customer__auth_user=request.user)
+
+    return render(request, 'customer/chat_history.html', {
+        'page_obj': page_obj,
+        'bots': bots
+    })
+
+
+@login_required
+def update_bot_settings(request):
+    if request.method == "POST":
+        bot_id = request.POST.get("bot_id")
+
+        try:
+            bot = CustomerBot.objects.get(
+                id=bot_id,
+                customer__auth_user=request.user
+            )
+
+            bot.name = request.POST.get("name")
+            bot.welcome_message = request.POST.get("welcome_message")
+
+            if request.FILES.get("bot_image"):
+                bot.bot_image = request.FILES.get("bot_image")
+
+            bot.save()
+
+            return JsonResponse({"status": "success"})
+
+        except CustomerBot.DoesNotExist:
+            return JsonResponse({"status": "error"})
+
+    return JsonResponse({"status": "error"})

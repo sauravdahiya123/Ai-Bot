@@ -1,0 +1,133 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white d-flex justify-content-between">
+            <h4>Visitor List</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- 🔍 Search + Filter -->
+            <form method="get" class="row mb-3">
+                <div class="col-md-4">
+                    <input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="Search name/email/phone">
+                </div>
+               
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+
+            <!-- 📊 Table -->
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Location</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ v.name }}</td>
+                        <td>{{ v.email }}</td>
+                        <td>{{ v.phone }}</td>
+                        <td>{{ v.location }}</td>
+                        <td>
+                            {% if v.message %}
+                                <button class="btn btn-sm btn-info" onclick="showMessage('{{ v.message|escapejs }}')">
+                                    View
+                                </button>
+                            {% else %}
+                                <span class="text-muted">No message</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ v.created_at|date:"d M Y H:i" }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteVisitor({{ v.id }})">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">No Data Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- 📄 Pagination -->
+            <nav>
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- 📩 Message Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5>Visitor Message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modalMessage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⚙️ Scripts -->
+<script>
+function showMessage(msg){
+    document.getElementById('modalMessage').innerText = msg;
+    var modal = new bootstrap.Modal(document.getElementById('messageModal'));
+    modal.show();
+}
+
+function deleteVisitor(id){
+    if(confirm("Delete this visitor?")){
+        fetch(`/visitors/delete/${id}/`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'success'){
+                location.reload();
+            }
+        });
+    }
+}
+</script>
+
+{% endblock %}

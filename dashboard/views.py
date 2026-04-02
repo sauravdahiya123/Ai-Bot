@@ -69,6 +69,7 @@ def verify_user(request):
         api_key = body.get("api_key")
 
         user = User.objects.filter(api_key=api_key).first()
+        bot = CustomerBot.objects.filter(customer=user).first()
 
         if not user:
             return JsonResponse({"status": False})
@@ -80,7 +81,9 @@ def verify_user(request):
             "status": True,
             "user_id": user.id,
             "limit": user.requests_limit,
-            "used": user.used_requests
+            "used": user.used_requests,
+            "language": bot.language if bot else "en"   # 🔥 ADD THIS
+
         })
 
     except:
@@ -172,6 +175,7 @@ def chatbot_page(request, user_id):
 
         return render(request, "chatbot.html", {
             "api_key": user.api_key,
+            "bot":bot,
             "store_data": store_data   # 🔥 important
         })
     
@@ -386,3 +390,20 @@ def get_qa(request):
         })
 
     return JsonResponse({"results": data})
+
+
+def get_bot_details(request):
+    bot_id = request.GET.get("bot_id")
+
+    try:
+        bot = CustomerBot.objects.get(id=bot_id)
+
+        return JsonResponse({
+            "status": True,
+            "name": bot.name,
+            "image": bot.bot_image.url if bot.bot_image else "",
+            "welcome_message": bot.welcome_message
+        })
+
+    except:
+        return JsonResponse({"status": False})

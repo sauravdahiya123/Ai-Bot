@@ -113,6 +113,54 @@ body {
     background: red;
     color: white;
 }
+
+.close-btn {
+    background: #ff4d4d;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    background: #ff1a1a;
+    transform: scale(1.1);
+}
+
+#chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+}
+
+/* LEFT SIDE */
+.bot-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bot-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#botName {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
 </style>
 </style>
 
@@ -126,19 +174,106 @@ body {
 <div id="chatbox">
     
     <div id="chatHeader">
-        <span>Chatbot</span>
-        <button onclick="toggleChat()">X</button>
+    
+    <!-- LEFT SIDE -->
+    <div class="bot-info">
+        <img id="botImage" src="{{ bot.bot_image.url }}" class="bot-img">
+        <span id="botName">{{ bot.name }}</span>
     </div>
+
+
+
+    <!-- RIGHT SIDE -->
+    <button onclick="toggleChat()" class="close-btn">&times;</button>
+
+</div>
+
+
+    
 
     <div id="messages"></div>
 
-    <div id="inputArea">
-        <input id="question" placeholder="Ask something"/>
-        <button onclick="ask()">Send</button>
-        <button onclick="startVoice()">🎤</button>
+   <div id="inputArea">
+
+    <!-- <button class="icon-btn" onclick="startVoice()">🎤</button> -->
+
+    <input id="question" placeholder="Type your message..." />
+
+    <button class="send-btn" onclick="ask()">➤</button>
+
     </div>
+
+
+<style>
+
+    #inputArea {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #0a0a0a;
+}
+
+/* INPUT */
+#question {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 12px;
+    border-radius: 20px;
+    background: #f1f1f1;
+    font-size: 14px;
+}
+
+/* ICON BUTTON (MIC) */
+.icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #555;
+    transition: 0.2s;
+}
+
+.icon-btn:hover {
+    color: #007bff;
+}
+
+/* SEND BUTTON */
+.send-btn {
+    background: linear-gradient(45deg, #007bff, #ff4d6d);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+}
+</style>
 </div>
+
+
+
+
+
+
+
+
+
+
 <script>
+    const BASE_URL = "{{ request.scheme }}://{{ request.get_host }}";
 
 
 // 🔥 AUTO API KEY (Django se aayega)
@@ -155,7 +290,7 @@ function handleSalesResponse(choice,box){
         addMessage("bot", "Great! Our sales team will contact you soon.");
         
         // 👉 optional API call
-        fetch("http://backbotv1.borgdesk.com/connect-sales", {
+        fetch(`${BASE_URL}/connect-sales`, {
             method: "POST"
         });
 
@@ -231,13 +366,32 @@ function handleSalesResponse(choice,box){
         👤 User Details
     </div>
 
-    <div class="body">
-        <input id="name" placeholder="Enter your name">
-        <input id="email" placeholder="Enter your email">
-        <input id="phone" placeholder="Enter mobile number">
-        <input id="location" placeholder="Your location">
-        <textarea id="message" placeholder="Your message..."></textarea>
 
+    <div class="body">
+        <div class="mb-3">
+    <label class="form-label">Name <span style="color: red;">*</span> </label>
+    <input id="name" required class="form-control" placeholder="Enter your name">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Email <span style="color: red;">*</span>  </label>
+    <input id="email" required class="form-control" placeholder="Enter your email">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Mobile Number <span style="color: red;">*</span> </label>
+    <input id="phone" required class="form-control" placeholder="Enter mobile number">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Location <span style="color: red;">*</span> </label>
+    <input id="location" required class="form-control" placeholder="Your location">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Message <span style="color: red;">*</span> </label>
+    <textarea id="message" required class="form-control" rows="3" placeholder="Your message..."></textarea>
+</div>
         <button onclick="submitForm()">Start Chat</button>
     </div>
 
@@ -266,7 +420,7 @@ function submitForm(){
         message: document.getElementById("message").value
     };
 
-    fetch("http://backbotv1.borgdesk.com/api/save-visitor/", {
+    fetch(`${BASE_URL}/api/save-visitor/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -350,6 +504,18 @@ function toggleChat(){
 
 
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const welcomeMessage = "{{ bot.welcome_message|escapejs }}";
+    const botImage = "{% if bot.bot_image %}{{ bot.bot_image.url }}{% endif %}";
+    const botName = "{{ bot.name }}";
+
+    // 🔥 add message
+    addMessage("bot",welcomeMessage);
+
+});
 
 // 🔥 ADD MESSAGE UI
 function addMessage(type, text){

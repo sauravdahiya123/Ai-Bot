@@ -1,43 +1,220 @@
-<!-- chat/templates/chat/dashboard.html -->
 {% extends "customer/base.html" %}
-
 {% block title %}Settings{% endblock %}
 
 {% block content %}
 
+<div class="container py-4">
 
-<div class="container-fluid">
-
-
-    <div class="card p-3 mb-4">
-        <h5>Data Storage Setting</h5>
-
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="storeToggle"
-                {% if bot.store_data %}checked{% endif %}>
-            <label class="form-check-label">
-                Store User Chat Data
-            </label>
-        </div>
+    <div class="mb-4">
+        <h3 class="fw-bold">⚙️ Bot Settings</h3>
+        <p class="text-muted">Manage your chatbot configuration</p>
     </div>
 
+    <div class="row g-4">
 
-    <div class="card p-3 mb-4">
-    <h5>Chat Bot Link</h5>
+        <!-- LEFT -->
+        <div class="col-lg-6">
 
-    <div class="form-check form-switch">
-        <input type="text" class="form-control"
-               value="{{ request.scheme }}://{{ request.get_host }}/chatbot/{{ user_id }}"
-               readonly>
-        
-       <label class="form-check-label mt-2">
-    This is your chatbot link. You can use it on your website or any platform, and your chatbot will appear wherever it is integrated.
-</label>
+            <!-- Store Data -->
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-1">Store Chat Data</h6>
+                        <small class="text-muted">Save conversations for analytics</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="storeToggle"
+                            {% if bot.store_data %}checked{% endif %}>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Link -->
+            <div class="card shadow-sm border-0 rounded-4 mt-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-2">Chatbot Link</h6>
+
+                    <div class="input-group">
+                        <input type="text" id="chatLink" class="form-control"
+                            value="{{ request.scheme }}://{{ request.get_host }}/chatbot/{{ user_id }}"
+                            readonly>
+                        <button class="btn btn-outline-primary" onclick="copyLink()">Copy</button>
+                    </div>
+
+                    <small class="text-muted mt-2 d-block">
+                        Use this link anywhere to open your chatbot
+                    </small>
+                </div>
+            </div>
+
+            <!-- Language -->
+            <div class="card shadow-sm border-0 rounded-4 mt-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-2">Bot Language</h6>
+
+                    <select id="languageSelect" data-bot-id="{{ bot.id }}" class="form-select">
+                        <option value="en" {% if bot.language == 'en' %}selected{% endif %}>English</option>
+                        <option value="hi" {% if bot.language == 'hi' %}selected{% endif %}>Hindi</option>
+                        <option value="hinglish" {% if bot.language == 'hinglish' %}selected{% endif %}>Hinglish</option>
+                    </select>
+
+                    <div id="msg" class="text-success mt-2" style="display:none;">Updated ✅</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-6">
+
+            <!-- Branding -->
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+
+                    <h6 class="fw-semibold mb-3">🤖 Bot Branding</h6>
+
+                    <div class="mb-3">
+                        <label class="form-label">Bot Name</label>
+                        <input type="text" id="botName" class="form-control" value="{{ bot.name }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Welcome Message</label>
+                        <textarea id="welcomeMessage" class="form-control" rows="3">{{ bot.welcome_message }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Bot Icon</label>
+                        <input type="file" id="botImage" class="form-control">
+
+                        {% if bot.bot_image %}
+                        <div class="mt-2 d-flex align-items-center gap-2">
+                            <img src="{{ bot.bot_image.url }}" class="bot-preview">
+                            <small class="text-muted">Current Icon</small>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button class="btn btn-success w-100 rounded-pill" onclick="updateBot()">
+                        💾 Save Changes
+                    </button>
+
+                    <div id="botMsg" class="text-success text-center mt-2" style="display:none;">
+                        Updated Successfully ✅
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
 
+<!-- 🎨 CSS -->
+<style>
+.bot-preview {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-    <script>
+.card {
+    transition: 0.3s;
+}
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #28a745, #00c851);
+    border: none;
+}
+</style>
+
+<!-- ✅ JS -->
+<script>
+
+// 🔐 CSRF
+function getCSRFToken() {
+    return document.cookie.split('; ')
+        .find(row => row.startsWith('csrftoken='))
+        .split('=')[1];
+}
+
+// 📋 COPY LINK
+function copyLink(){
+    const input = document.getElementById("chatLink");
+    input.select();
+    document.execCommand("copy");
+    alert("Copied!");
+}
+
+// 🔥 UPDATE BOT
+function updateBot(){
+    const name = document.getElementById("botName").value;
+    const message = document.getElementById("welcomeMessage").value;
+    const image = document.getElementById("botImage").files[0];
+    const botId = "{{ bot.id }}";
+
+    let formData = new FormData();
+    formData.append("bot_id", botId);
+    formData.append("name", name);
+    formData.append("welcome_message", message);
+
+    if(image){
+        formData.append("bot_image", image);
+    }
+
+    fetch("/update-bot-settings/", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("botMsg").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("botMsg").style.display = "none";
+            }, 2000);
+        }
+    });
+}
+
+// 🌐 LANGUAGE CHANGE
+document.getElementById('languageSelect').addEventListener('change', function () {
+
+    const language = this.value;
+    const botId = this.getAttribute('data-bot-id');
+
+    fetch(`/update-bot-language/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+            bot_id: botId,
+            language: language
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById('msg').style.display = "block";
+            setTimeout(() => {
+                document.getElementById('msg').style.display = "none";
+            }, 2000);
+        }
+    });
+
+});
+
+// 🔥 STORE DATA TOGGLE
 document.getElementById("storeToggle").addEventListener("change", function() {
     let status = this.checked;
 
@@ -45,20 +222,14 @@ document.getElementById("storeToggle").addEventListener("change", function() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": "{{ csrf_token }}"
+            "X-CSRFToken": getCSRFToken()
         },
         body: JSON.stringify({
             status: status
         })
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log("Updated:", data);
     });
 });
+
 </script>
 
-
-
-   
 {% endblock %}

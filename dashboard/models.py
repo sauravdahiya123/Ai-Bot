@@ -40,6 +40,14 @@ class CustomerBot(models.Model):
     name = models.CharField(max_length=100)  # Bot name
     created_at = models.DateTimeField(auto_now_add=True)
     store_data = models.BooleanField(default=True)  # 🔥 NEW FIELD
+    LANGUAGE_CHOICES = [
+        ('en', 'English'),
+        ('hi', 'Hindi'),
+        ('hinglish', 'Hinglish'),
+    ]
+    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, default='en')
+    bot_image = models.ImageField(upload_to='bot_images/', null=True, blank=True)
+    welcome_message = models.TextField(default="Hi 👋 How can I help you?")
 
     def __str__(self):
         return f"{self.name} - {self.customer.email}"

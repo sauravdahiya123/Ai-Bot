@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path ,include
 from dashboard import views
 from customer.views import toggle_store_data
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,12 +28,12 @@ urlpatterns = [
     path("add-url-page/", views.add_url_page,name="add_url_page"),
     path("chatbot/<int:user_id>", views.chatbot_page),
     path("api/", include("dashboard.urls")),
-    path("customer/", include("customer.urls")),
+    path("", include("customer.urls")),
     path("verify-user/", views.verify_user),
     path("user-list/", views.user_list,name='user_list'),
-    path("", views.admin_login, name="login"),
+    path("admin_url", views.admin_login, name="login"),
     path("logout/", views.admin_logout, name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path('toggle-store-data/', toggle_store_data, name='toggle_store_data'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

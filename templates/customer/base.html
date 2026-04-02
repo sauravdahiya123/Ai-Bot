@@ -106,8 +106,17 @@
 <div id="sidebar">
 
     <a href="{% url 'customer_dashboard' %}"><i class="fa fa-home me-2"></i> Dashboard</a>
+    <a href="{% url 'visitor_list' %}"><i class="fa fa-users me-2"></i>Visitor List</a>
+        <a href="{% url 'save_qa' %}"><i class="fa fa-gear me-2"></i> Save QA</a>
+        <a href="{% url 'chat_history' %}"><i class="fa fa-file me-2"></i>Chat History</a>
+
+
+        
+<a href="{% url 'chatqa_list' %}">
+    <i class="fa fa-comments me-2"></i> Chat QA
+</a>
+
     <a href="{% url 'customer_setting' %}"><i class="fa fa-gear me-2"></i> Settings</a>
-    <a href="{% url 'save_qa' %}"><i class="fa fa-gear me-2"></i> Save QA</a>
 
     <hr>
 

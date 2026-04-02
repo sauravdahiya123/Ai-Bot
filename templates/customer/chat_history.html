@@ -1,0 +1,154 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg rounded-4">
+        
+        <!-- Header -->
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">💬 Chat History (Last 24 Hours)</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- 🔍 FILTER -->
+            <form method="get" class="row mb-4">
+
+                <div class="col-md-3">
+                    <select name="bot_id" class="form-control">
+                        <option value="">All Bots</option>
+                        {% for b in bots %}
+                            <option value="{{ b.id }}" {% if request.GET.bot_id == b.id|stringformat:"s" %}selected{% endif %}>
+                                {{ b.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <input type="text" name="visitor_id" value="{{ request.GET.visitor_id }}" 
+                           class="form-control" placeholder="Visitor ID">
+                </div>
+
+                <div class="col-md-3">
+                    <input type="text" name="search" value="{{ request.GET.search }}" 
+                           class="form-control" placeholder="Search question/answer">
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">Filter</button>
+                </div>
+
+            </form>
+
+            <!-- 💬 CHAT LIST -->
+            <div style="max-height: 600px; overflow-y: auto;">
+
+                {% for chat in page_obj %}
+                <div class="chat-box mb-4 p-3">
+
+                    <!-- USER -->
+                    <div class="chat-user text-end mb-2">
+                        <div class="chat-bubble user-bubble">
+                            {{ chat.question }}
+                        </div>
+                    </div>
+
+                    <!-- BOT -->
+                    <div class="chat-bot text-start">
+                        <div class="chat-bubble bot-bubble">
+                            {{ chat.answer }}
+                        </div>
+                    </div>
+
+                    <!-- META -->
+                    <div class="mt-2 text-muted small">
+                        🕒 {{ chat.created_at|date:"d M Y H:i" }} |
+                        👤 {{ chat.session.visitor_id }} |
+                        🤖 {{ chat.session.bot.name }}
+                    </div>
+
+                </div>
+                {% empty %}
+                <p class="text-center text-muted">No chat history found</p>
+                {% endfor %}
+
+            </div>
+
+            <!-- 📄 PAGINATION -->
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}&bot_id={{ request.GET.bot_id }}&visitor_id={{ request.GET.visitor_id }}&search={{ request.GET.search }}">
+                                Prev
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}&bot_id={{ request.GET.bot_id }}&visitor_id={{ request.GET.visitor_id }}&search={{ request.GET.search }}">
+                                {{ num }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}&bot_id={{ request.GET.bot_id }}&visitor_id={{ request.GET.visitor_id }}&search={{ request.GET.search }}">
+                                Next
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+
+<!-- 🎨 STYLING -->
+<style>
+.chat-box {
+    background: #f9f9f9;
+    border-radius: 12px;
+}
+
+.chat-bubble {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    font-size: 14px;
+}
+
+.user-bubble {
+    background: #007bff;
+    color: #fff;
+}
+
+.bot-bubble {
+    background: #28a745;
+    color: #fff;
+}
+
+.chat-user {
+    text-align: right;
+}
+
+.chat-bot {
+    text-align: left;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(45deg, #007bff, #ff4d6d);
+    border: none;
+}
+</style>
+
+{% endblock %}
