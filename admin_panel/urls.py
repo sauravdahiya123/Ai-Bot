@@ -31,7 +31,7 @@ urlpatterns = [
     path("", include("customer.urls")),
     path("verify-user/", views.verify_user),
     path("user-list/", views.user_list,name='user_list'),
-    path("admin_url", views.admin_login, name="login"),
+    path("admin_login", views.admin_login, name="login"),
     path("logout/", views.admin_logout, name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path('toggle-store-data/', toggle_store_data, name='toggle_store_data'),

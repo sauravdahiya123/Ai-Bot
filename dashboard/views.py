@@ -254,7 +254,7 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect("dashboard")  # admin panel
+            return redirect("user_list")  # admin panel
         else:
             messages.error(request, "Invalid credentials")
 

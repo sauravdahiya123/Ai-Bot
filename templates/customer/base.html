@@ -70,6 +70,16 @@
         #content.full {
             margin-left: 0;
         }
+        #footer {
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    color: #555;
+}
     </style>
 </head>
 
@@ -104,29 +114,53 @@
 
 <!-- 🔥 SIDEBAR -->
 <div id="sidebar">
-
-    <a href="{% url 'customer_dashboard' %}"><i class="fa fa-home me-2"></i> Dashboard</a>
-    <a href="{% url 'visitor_list' %}"><i class="fa fa-users me-2"></i>Visitor List</a>
-        <a href="{% url 'save_qa' %}"><i class="fa fa-gear me-2"></i> Save QA</a>
-        <a href="{% url 'chat_history' %}"><i class="fa fa-file me-2"></i>Chat History</a>
-
-
-        
-<a href="{% url 'chatqa_list' %}">
-    <i class="fa fa-comments me-2"></i> Chat QA
+<a href="{% url 'customer_dashboard' %}">
+    <i class="fa-solid fa-house me-2"></i> Dashboard
 </a>
 
-    <a href="{% url 'customer_setting' %}"><i class="fa fa-gear me-2"></i> Settings</a>
+<a href="{% url 'visitor_list' %}">
+    <i class="fa-solid fa-users me-2"></i> Visitor List
+</a>
 
-    <hr>
+<a href="{% url 'chat_history' %}">
+    <i class="fa-solid fa-clock-rotate-left me-2"></i> Chat History
+</a>
 
-    <a href="{% url 'customer_logout' %}"><i class="fa fa-sign-out-alt me-2"></i> Logout</a>
+<a href="{% url 'save_qa' %}">
+    <i class="fa-solid fa-flask me-2"></i> Save FAQ
+</a>
+
+<a href="{% url 'chatqa_list' %}">
+    <i class="fa-solid fa-comments me-2"></i> List FAQ
+</a>
+
+<a href="{% url 'customer_setting' %}">
+    <i class="fa-solid fa-gear me-2"></i> Settings
+</a>
+
+<hr>
+
+<a href="{% url 'customer_logout' %}">
+    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+</a>
 </div>
 
 <!-- 🔥 CONTENT -->
 <div id="content">
     {% block content %}{% endblock %}
 </div>
+
+
+
+
+<!-- 🔥 FOOTER -->
+<footer id="footer">
+    <div class="text-center">
+        © 2026 Powered & Developed by 
+        <strong>GoodPick AI Lab</strong> 
+        (AI Unit of Goodpick Technologies Pvt. Ltd.)
+    </div>
+</footer>
 
 <!-- JS -->
 <script>
