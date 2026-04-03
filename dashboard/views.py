@@ -98,7 +98,7 @@ from django.http import JsonResponse
 from .models import User, UserURL
 
 # 🔥 FastAPI URL
-FASTAPI_CRAWL = "http://backbotv1.borgdesk.com/crawl"
+FASTAPI_CRAWL = "https://backbotv1.borgdesk.com/crawl"
 # def add_url(request):
 #     body = json.loads(request.body)
 
@@ -140,11 +140,17 @@ def add_url_page(request):
         for url in urls:
             UserURL.objects.create(user=user, url=url)
 
-        # FastAPI call
-        requests.post(FASTAPI_CRAWL, json={
-            "user_id": str(user.id),
-            "urls": [url]
-        })
+        try:
+            res = requests.post(FASTAPI_CRAWL, json={
+                "user_id": str(user.id),
+                "urls": urls
+            })
+
+            print("FastAPI Response:", res.status_code, res.text)
+
+        except Exception as e:
+            print("FastAPI Error:", e)
+        
         msg = "Urls Saved Succesfully !"
         # return redirect("/add-url-page/")
 

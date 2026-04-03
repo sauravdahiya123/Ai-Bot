@@ -539,7 +539,7 @@ async function ask(){
     addMessage("user", q);
     input.value = "";
 
-    let res = await fetch(`http://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
+    let res = await fetch(`https://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
     let data = await res.json();
 
     addMessage("bot", data.answer);
