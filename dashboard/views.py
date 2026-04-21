@@ -413,3 +413,19 @@ def get_bot_details(request):
 
     except:
         return JsonResponse({"status": False})
+
+
+def ai_chatbot_view(request):
+    return render(request, "ai_chatbot.html")
+
+@csrf_exempt
+def voice_ask(request):
+    if request.method == "POST":
+        audio_file = request.FILES.get("audio_file")
+        dashboard_user = User.objects.get(auth_user=request.user)
+
+        api_key = dashboard_user.api_key
+
+        files = {"audio_file": audio_file}
+        res = requests.post("http://127.0.0.1:8001/voice-ask", files=files, data={"api_key": api_key})
+        return JsonResponse(res.json())

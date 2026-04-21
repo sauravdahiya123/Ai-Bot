@@ -7,4 +7,7 @@ urlpatterns = [
     path('save-chat/', views.save_chat, name='save_chat'),
     path("save-visitor/", views.save_visitor,name='save_visitor'),
     path("get-qa/", views.get_qa,name='get_qa'),
+    path("ai-chatbot/", views.ai_chatbot_view, name="ai_chatbot"),
+    path("voice-ask/", views.voice_ask, name="voice_ask"),
+
 ]

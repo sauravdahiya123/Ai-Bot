@@ -1,0 +1,36 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite DB
+db.sqlite3
+
+# Django migrations
+*/migrations/*.pyc
+*/migrations/*.py[cod]
+
+# Django media files
+/media/
+media/
+
+# Django static files (collected)
+/static/
+static/
+
+# Environment / virtual env
+.env
+venv/
+ENV/
+env/
+*.env
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
