@@ -48,58 +48,107 @@
             </div>
 
 
-            <div class="mb-3">
-                <label class="form-label">Bot Theme Color</label>
-
-                <input type="color"
-                    id="themeColor"
-                    data-bot-id="{{ bot.id }}"
-                    value="{{ bot.theme_color|default:'#0d6efd' }}"
-                    class="form-control form-control-color">
-            </div>
-
+           
 
             <div class="card shadow-sm border-0 rounded-4 mt-3">
-    <div class="card-body">
+    <div class="row g-4">
 
-        <h6 class="fw-bold mb-3">📊 API Usage</h6>
+    <!-- 💰 BALANCE CARD -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-3">
+            <h6 class="text-muted mb-2">💰 Wallet Balance</h6>
+            <h3 class="fw-bold text-success">₹{{ user.balance }}</h3>
 
-        <!-- Progress Bar -->
-        <div class="progress mb-2" style="height: 10px;">
-            <div class="progress-bar bg-success"
-                 role="progressbar"
-                 style="width: {{ user.used_requests|floatformat:0 }}%">
+            <small class="text-muted">
+                Per Request: ₹{{ user.cost_per_request }}
+            </small>
+        </div>
+    </div>
+
+    <!-- 📊 USAGE CARD -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-3">
+            <h6 class="text-muted mb-2">📊 API Usage</h6>
+
+            <div class="progress mb-2" style="height: 8px;">
+                <div class="progress-bar bg-primary"
+                     role="progressbar"
+                     style="width: {{ usage_percent }}%">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <small>Used: <b>{{ user.used_requests }}</b></small>
+                <small>Total: <b>{{ user.requests_limit }}</b></small>
             </div>
         </div>
+    </div>
 
-        <div class="d-flex justify-content-between">
-            <small>Used: <b>{{ user.used_requests }}</b></small>
-            <small>Total: <b>{{ user.requests_limit }}</b></small>
+    <!-- 🔄 REMAINING CARD -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-3">
+            <h6 class="text-muted mb-2">🔄 Remaining</h6>
+            <h3 class="fw-bold text-primary">{{ remaining }}</h3>
+
+            <small class="text-muted">
+                Requests left in your plan
+            </small>
+        </div>
+    </div>
+
+</div>
+</div>
+
+            <!-- Language -->
+          <div class="card shadow-sm border-0 rounded-4 mt-3">
+    <div class="card-body">
+
+        <h6 class="fw-semibold mb-3">Bot Settings</h6>
+
+        <!-- 🔹 Language -->
+        <div class="mb-3">
+            <label class="form-label">Bot Language</label>
+            <select id="languageSelect"
+                    data-bot-id="{{ bot.id }}"
+                    class="form-select">
+                    
+                <option value="en" {% if bot.language == 'en' %}selected{% endif %}>English</option>
+                <option value="hi" {% if bot.language == 'hi' %}selected{% endif %}>Hindi</option>
+                <option value="hinglish" {% if bot.language == 'hinglish' %}selected{% endif %}>Hinglish</option>
+            </select>
         </div>
 
-        <div class="mt-2">
-            <small class="text-muted">
-                Remaining Requests: <b>{{ remaining }}</b>
-            </small>
+        <!-- 🔹 Theme Color -->
+        <div class="mb-2">
+            <label class="form-label">Bot Theme Color</label>
+            <input type="color"
+                   id="themeColor"
+                   data-bot-id="{{ bot.id }}"
+                   value="{{ bot.theme_color|default:'#0d6efd' }}"
+                   class="form-control form-control-color">
+        </div>
+
+
+         <div class="mb-2">
+            <label class="form-label">Show Sales Prompt After (messages)</label>
+            <input type="number"
+                   id="salesPromptAfter"
+                   data-bot-id="{{ bot.id }}"
+                   value="{{ bot.sales_prompt_after|default:10 }}"
+                   min="1"
+                   class="form-control">
+        </div>
+
+
+        <!-- ✅ Message -->
+        <div id="msg" class="text-success mt-2" style="display:none;">
+            Updated ✅
         </div>
 
     </div>
 </div>
 
-            <!-- Language -->
-            <div class="card shadow-sm border-0 rounded-4 mt-3">
-                <div class="card-body">
-                    <h6 class="fw-semibold mb-2">Bot Language</h6>
 
-                    <select id="languageSelect" data-bot-id="{{ bot.id }}" class="form-select">
-                        <option value="en" {% if bot.language == 'en' %}selected{% endif %}>English</option>
-                        <option value="hi" {% if bot.language == 'hi' %}selected{% endif %}>Hindi</option>
-                        <option value="hinglish" {% if bot.language == 'hinglish' %}selected{% endif %}>Hinglish</option>
-                    </select>
-
-                    <div id="msg" class="text-success mt-2" style="display:none;">Updated ✅</div>
-                </div>
-            </div>
 
         </div>
 
@@ -178,7 +227,36 @@
 <!-- ✅ JS -->
 <script>
 
+const languageSelect = document.getElementById("languageSelect");
+const themeColor = document.getElementById("themeColor");
+const salesPromptAfter = document.getElementById("salesPromptAfter");
+const msg = document.getElementById("msg");
 
+function updateBotSettings() {
+    const botId = languageSelect.dataset.botId;
+
+    fetch(`/update-bot-settings2/${botId}/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+            language: languageSelect.value,
+            theme_color: themeColor.value,
+            sales_prompt_after: salesPromptAfter.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 2000);
+    });
+}
+
+// languageSelect.addEventListener("change", updateBotSettings);
+themeColor.addEventListener("change", updateBotSettings);
+salesPromptAfter.addEventListener("change", updateBotSettings);
 
 
 

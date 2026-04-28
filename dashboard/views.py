@@ -158,7 +158,7 @@ def chatbot_page(request, user_id):
         user = User.objects.get(id=user_id)
         print("users",user)
         bot = CustomerBot.objects.filter(customer=user).first()
-        print(bot.theme_color)
+        # print(bot.theme_color)
         store_data = False
         if bot:
             store_data = bot.store_data
@@ -166,6 +166,7 @@ def chatbot_page(request, user_id):
         return render(request, "chatbot.html", {
             "api_key": user.api_key,
             "bot":bot,
+            "sales_prompt_after": bot.sales_prompt_after if bot else 10,
             "store_data": store_data   # 🔥 important
         })
     
@@ -214,13 +215,19 @@ def update_usage(request):
         try:
             user = User.objects.get(id=user_id)
 
-            if user.used_requests >= user.requests_limit:
-                return JsonResponse({"status": "error", "msg": "Limit exceeded"})
+            if user.balance < user.cost_per_request:
+                return JsonResponse({"status": "error", "msg": "Insufficient balance"})
 
+            user.balance -= user.cost_per_request
             user.used_requests += 1
             user.save()
 
-            return JsonResponse({"status": "success", "used": user.used_requests})
+            return JsonResponse({
+                "status": "success",
+                "remaining_balance": str(user.balance)
+            })
+
+            # return JsonResponse({"status": "success", "used": user.used_requests})
 
         except User.DoesNotExist:
             return JsonResponse({"status": "error", "msg": "User not found"})
@@ -414,7 +421,7 @@ def voice_ask(request):
         res = requests.post("http://127.0.0.1:8001/voice-ask", files=files, data={"api_key": api_key})
         return JsonResponse(res.json())
     
-FASTAPI_PDF = "http://backbotv1.borgdesk.com/upload-pdf-url"
+FASTAPI_PDF = "https://backbotv1.borgdesk.com/upload-pdf-url"
 # FASTAPI_PDF = "http://127.0.0.1:8002/upload-pdf-url"
 
 from pydantic import BaseModel

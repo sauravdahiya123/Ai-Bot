@@ -534,6 +534,8 @@ function addMessage(type, text){
     div.scrollTop = div.scrollHeight;
 }
 
+let SALES_AFTER = {{ sales_prompt_after|default:10 }};
+console.log("SALES_AFTER",SALES_AFTER)
 // 🔥 ASK API (FastAPI)
 var count  = 0;
 async function ask(){
@@ -551,7 +553,7 @@ async function ask(){
     let data = await res.json();
 
     addMessage("bot", data.answer);
-    if(count == 5){
+    if(count == SALES_AFTER){
         showSalesOptions(data.sales_message, data.options);
     }
 }

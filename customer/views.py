@@ -111,7 +111,8 @@ def customer_setting(request):
         "bot":bot,
         "user_id":dashboard_user.id,
         "remaining":dashboard_user.requests_limit - dashboard_user.used_requests  ,
-        "user":dashboard_user
+        "user":dashboard_user,
+        'remaning_blance':dashboard_user.balance
     })
 
 
@@ -293,49 +294,63 @@ def update_bot_settings(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
-def update_bot_theme(request):
+# @csrf_exempt
+# def update_bot_theme(request):
+#     if request.method == "POST":
+#         try:
+#             data = json.loads(request.body)
+#             print("data",data)
+#             bot_id = data.get("bot_id")
+#             theme_color = data.get("theme_color")
+
+#             if not bot_id:
+#                 return JsonResponse({
+#                     "status": "error",
+#                     "message": "bot_id missing"
+#                 })
+
+#             # ✅ FIXED MODEL HERE
+#             bot = CustomerBot.objects.get(id=bot_id)
+
+#             bot.theme_color = theme_color
+#             bot.save()
+
+#             return JsonResponse({
+#                 "status": "success",
+#                 "message": "Theme updated successfully",
+#                 "theme_color": theme_color
+#             })
+
+#         except CustomerBot.DoesNotExist:
+#             return JsonResponse({
+#                 "status": "error",
+#                 "message": "Bot not found"
+#             })
+
+#         except Exception as e:
+#             return JsonResponse({
+#                 "status": "error",
+#                 "message": str(e)
+#             })
+
+#     return JsonResponse({
+#         "status": "error",
+#         "message": "Invalid request method"
+#     })
+
+
+
+def update_bot_settings2(request, bot_id):
     if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            print("data",data)
-            bot_id = data.get("bot_id")
-            theme_color = data.get("theme_color")
+        data = json.loads(request.body)
 
-            if not bot_id:
-                return JsonResponse({
-                    "status": "error",
-                    "message": "bot_id missing"
-                })
+        bot = CustomerBot.objects.get(id=bot_id)
 
-            # ✅ FIXED MODEL HERE
-            bot = CustomerBot.objects.get(id=bot_id)
+        bot.language = data.get("language", bot.language)
+        bot.theme_color = data.get("theme_color", bot.theme_color)
+        bot.sales_prompt_after = data.get("sales_prompt_after", bot.sales_prompt_after)
 
-            bot.theme_color = theme_color
-            bot.save()
+        bot.save()
 
-            return JsonResponse({
-                "status": "success",
-                "message": "Theme updated successfully",
-                "theme_color": theme_color
-            })
-
-        except CustomerBot.DoesNotExist:
-            return JsonResponse({
-                "status": "error",
-                "message": "Bot not found"
-            })
-
-        except Exception as e:
-            return JsonResponse({
-                "status": "error",
-                "message": str(e)
-            })
-
-    return JsonResponse({
-        "status": "error",
-        "message": "Invalid request method"
-    })
-
-
-
+        return JsonResponse({"status": "success"})
+    

@@ -9,6 +9,9 @@ class User(models.Model):
     is_active = models.BooleanField(default=True)
     requests_limit = models.IntegerField(default=1000)
     used_requests = models.IntegerField(default=0)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # user wallet
+    cost_per_request = models.DecimalField(max_digits=6, decimal_places=4, default=0.50)  # per API cost
+
 
     def __str__(self):
         return self.email
@@ -58,6 +61,8 @@ class CustomerBot(models.Model):
     bot_image = models.ImageField(upload_to='bot_images/', null=True, blank=True)
     welcome_message = models.TextField(default="Hi 👋 How can I help you?")
     theme_color = models.CharField(max_length=20, default="#0d6efd")
+    sales_prompt_after = models.IntegerField(default=10)
+
 
 
     def __str__(self):
