@@ -47,6 +47,45 @@
                 </div>
             </div>
 
+
+            <div class="mb-3">
+                <label class="form-label">Bot Theme Color</label>
+
+                <input type="color"
+                    id="themeColor"
+                    data-bot-id="{{ bot.id }}"
+                    value="{{ bot.theme_color|default:'#0d6efd' }}"
+                    class="form-control form-control-color">
+            </div>
+
+
+            <div class="card shadow-sm border-0 rounded-4 mt-3">
+    <div class="card-body">
+
+        <h6 class="fw-bold mb-3">📊 API Usage</h6>
+
+        <!-- Progress Bar -->
+        <div class="progress mb-2" style="height: 10px;">
+            <div class="progress-bar bg-success"
+                 role="progressbar"
+                 style="width: {{ user.used_requests|floatformat:0 }}%">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <small>Used: <b>{{ user.used_requests }}</b></small>
+            <small>Total: <b>{{ user.requests_limit }}</b></small>
+        </div>
+
+        <div class="mt-2">
+            <small class="text-muted">
+                Remaining Requests: <b>{{ remaining }}</b>
+            </small>
+        </div>
+
+    </div>
+</div>
+
             <!-- Language -->
             <div class="card shadow-sm border-0 rounded-4 mt-3">
                 <div class="card-body">
@@ -131,10 +170,44 @@
     background: linear-gradient(45deg, #28a745, #00c851);
     border: none;
 }
+
+
 </style>
+
 
 <!-- ✅ JS -->
 <script>
+
+
+
+
+
+document.getElementById('themeColor').addEventListener('input', function () {
+
+    const color = this.value;
+    const botId = "{{ bot.id }}";
+
+    console.log("botId",botId);
+
+    fetch(`/update-bot-theme/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+            bot_id: botId,
+            theme_color: color
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Theme color updated");
+    });
+
+});
+
+
 
 // 🔐 CSRF
 function getCSRFToken() {

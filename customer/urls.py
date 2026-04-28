@@ -17,5 +17,7 @@ urlpatterns = [
     path('update-bot-language/', views.update_bot_language, name='update_bot_language'),
     path('chat-history/', views.chat_history_view, name='chat_history'),
     path('update-bot-settings/', views.update_bot_settings, name='update_bot_settings'),
+    path('update-bot-theme/', views.update_bot_theme, name='update_bot_theme'),
+
 ]
 

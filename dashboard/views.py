@@ -1,7 +1,7 @@
 import razorpay
 from django.conf import settings
 from django.http import JsonResponse
-from .models import User, Payment , Visitor , ChatQA
+from .models import User, Payment , Visitor , ChatQA, CompanyPDF
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -99,28 +99,12 @@ from .models import User, UserURL
 
 # 🔥 FastAPI URL
 FASTAPI_CRAWL = "https://backbotv1.borgdesk.com/crawl"
-# def add_url(request):
-#     body = json.loads(request.body)
 
-#     api_key = body.get("api_key")
-#     urls = body.get("urls", [])
+# FASTAPI_CRAWL = "http://127.0.0.1:8002/crawl"
 
-#     user = User.objects.filter(api_key=api_key).first()
 
-#     if not user:
-#         return JsonResponse({"status": False, "msg": "Invalid user"})
 
-#     # ✅ STEP 1: DB me save karo
-#     for url in urls:
-#         UserURL.objects.create(user=user, url=url, status="pending")
 
-#     # ✅ STEP 2: FastAPI ko call karo (🔥 IMPORTANT)
-#     requests.post(FASTAPI_CRAWL, json={
-#         "user_id": str(user.id),
-#         "urls": urls
-#     })
-
-#     return JsonResponse({"status": True, "msg": "URL added & crawling started"})
 
 @login_required(login_url="login")
 def add_url_page(request):
@@ -174,7 +158,7 @@ def chatbot_page(request, user_id):
         user = User.objects.get(id=user_id)
         print("users",user)
         bot = CustomerBot.objects.filter(customer=user).first()
-
+        print(bot.theme_color)
         store_data = False
         if bot:
             store_data = bot.store_data
@@ -429,3 +413,50 @@ def voice_ask(request):
         files = {"audio_file": audio_file}
         res = requests.post("http://127.0.0.1:8001/voice-ask", files=files, data={"api_key": api_key})
         return JsonResponse(res.json())
+    
+FASTAPI_PDF = "http://backbotv1.borgdesk.com/upload-pdf-url"
+# FASTAPI_PDF = "http://127.0.0.1:8002/upload-pdf-url"
+
+from pydantic import BaseModel
+
+class PDFRequest(BaseModel):
+    user_id: str
+    pdf_url: str
+    title: str | None = None
+
+@login_required(login_url="login")
+def upload_pdf(request):
+    users = User.objects.all()
+    msg = ""
+
+    if request.method == "POST":
+        user_id = request.POST.get("user_id")
+        title = request.POST.get("title")
+        pdf_file = request.FILES.get("pdf")
+
+        user = User.objects.get(id=user_id)
+
+        pdf_obj = CompanyPDF.objects.create(
+            user=user,
+            title=title,
+            file=pdf_file
+        )
+
+        # 🔥 SEND TO FASTAPI
+
+        print("request.build_absolute_uri(pdf_obj.file.url)",request.build_absolute_uri(pdf_obj.file.url))
+        try:
+            requests.post(FASTAPI_PDF, json={
+                "user_id": str(user.id),
+                "pdf_url": request.build_absolute_uri(pdf_obj.file.url),
+                "title": title
+            })
+        except Exception as e:
+            print("FastAPI error:", e)
+
+        msg = "PDF uploaded & processing started!"
+
+    return render(request, "add_pdf.html", {
+        "users": users,
+        "msg": msg
+    })

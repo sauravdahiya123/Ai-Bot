@@ -14,7 +14,7 @@ body {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    background: #007bff;
+    background: var(--bot-theme-color);
     color: white;
     padding: 15px;
     border-radius: 50%;
@@ -28,7 +28,7 @@ body {
     top: 0;
     width: 350px;
     height: 100%;
-    background: #111;
+    background: var(--bot-theme-color);
     color: white;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@ body {
 
 /* HEADER */
 #chatHeader {
-    background: #222;
+    background: var(--bot-theme-color);
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -161,7 +161,14 @@ body {
 
 
 
+
+
 </style>
+
+<style>
+:root {
+    --bot-theme-color: {{ bot.theme_color|default:'#007bff' }};
+}
 </style>
 
 </head>
@@ -243,7 +250,7 @@ body {
 
 /* SEND BUTTON */
 .send-btn {
-    background: linear-gradient(45deg, #007bff, #ff4d6d);
+    background: var(--bot-theme-color);
     border: none;
     color: #fff;
     font-size: 16px;
@@ -539,7 +546,8 @@ async function ask(){
     addMessage("user", q);
     input.value = "";
 
-    let res = await fetch(`https://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
+    // let res = await fetch(`https://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
+    let res = await fetch(`http://127.0.0.1:8002/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
     let data = await res.json();
 
     addMessage("bot", data.answer);

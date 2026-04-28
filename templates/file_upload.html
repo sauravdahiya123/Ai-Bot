@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <select name="user_id">
+        {% for user in users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="file" name="pdf_file" required>
+    <button type="submit">Upload PDF</button>
+</form>
+
+<p>{{ msg }}</p>
+
+
+{% endblock %}

@@ -33,6 +33,15 @@ class UserURL(models.Model):
     def __str__(self):
         return f"{self.user.email} - {self.url}"
     
+
+
+class CompanyPDF(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to="company_pdfs/")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+
 import json
 
 class CustomerBot(models.Model):
@@ -48,6 +57,8 @@ class CustomerBot(models.Model):
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, default='en')
     bot_image = models.ImageField(upload_to='bot_images/', null=True, blank=True)
     welcome_message = models.TextField(default="Hi 👋 How can I help you?")
+    theme_color = models.CharField(max_length=20, default="#0d6efd")
+
 
     def __str__(self):
         return f"{self.name} - {self.customer.email}"

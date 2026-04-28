@@ -106,11 +106,12 @@ def toggle_store_data(request):
 def customer_setting(request):
     dashboard_user = User.objects.get(auth_user=request.user)
     bot = CustomerBot.objects.filter(customer=dashboard_user).first()
-
     return render(request, "customer/settings.html", {
 
         "bot":bot,
-        "user_id":dashboard_user.id
+        "user_id":dashboard_user.id,
+        "remaining":dashboard_user.requests_limit - dashboard_user.used_requests  ,
+        "user":dashboard_user
     })
 
 
@@ -289,3 +290,52 @@ def update_bot_settings(request):
             return JsonResponse({"status": "error"})
 
     return JsonResponse({"status": "error"})
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def update_bot_theme(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print("data",data)
+            bot_id = data.get("bot_id")
+            theme_color = data.get("theme_color")
+
+            if not bot_id:
+                return JsonResponse({
+                    "status": "error",
+                    "message": "bot_id missing"
+                })
+
+            # ✅ FIXED MODEL HERE
+            bot = CustomerBot.objects.get(id=bot_id)
+
+            bot.theme_color = theme_color
+            bot.save()
+
+            return JsonResponse({
+                "status": "success",
+                "message": "Theme updated successfully",
+                "theme_color": theme_color
+            })
+
+        except CustomerBot.DoesNotExist:
+            return JsonResponse({
+                "status": "error",
+                "message": "Bot not found"
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                "status": "error",
+                "message": str(e)
+            })
+
+    return JsonResponse({
+        "status": "error",
+        "message": "Invalid request method"
+    })
+
+
+

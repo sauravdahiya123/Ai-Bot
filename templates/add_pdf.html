@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>📄 Upload PDF</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- USER SELECT -->
+    <label>Select User</label>
+    <select name="user_id" required>
+        {% for u in users %}
+            <option value="{{ u.id }}">{{ u.email }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <!-- TITLE -->
+    <label>PDF Title</label>
+    <input type="text" name="title" placeholder="Enter title" required>
+
+    <br><br>
+
+    <!-- FILE -->
+    <label>Upload PDF</label>
+    <input type="file" name="pdf" accept="application/pdf" required>
+
+    <br><br>
+
+    <button type="submit">Upload PDF</button>
+</form>
+
+<p style="color:green">{{ msg }}</p>
+{% endblock %}
