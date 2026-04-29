@@ -166,7 +166,6 @@ def chatbot_page(request, encoded_id):
         user = User.objects.get(id=user_id)
         print("users",user)
         bot = CustomerBot.objects.filter(customer=user).first()
-        # print(bot.theme_color)
         store_data = False
         if bot:
             store_data = bot.store_data
