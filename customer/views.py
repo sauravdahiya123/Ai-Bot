@@ -104,6 +104,12 @@ def toggle_store_data(request):
 
 import base64
 
+
+def company_pdf_list(request):
+    pdfs = CompanyPDF.objects.filter(user__auth_user=request.user).order_by('-uploaded_at')
+    return render(request, "customer/company_pdf_list.html", {"pdfs": pdfs})
+
+
 def customer_setting(request):
     dashboard_user = User.objects.get(auth_user=request.user)
     bot = CustomerBot.objects.filter(customer=dashboard_user).first()

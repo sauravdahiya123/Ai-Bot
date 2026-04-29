@@ -18,6 +18,7 @@ urlpatterns = [
     path('chat-history/', views.chat_history_view, name='chat_history'),
     path('update-bot-settings/', views.update_bot_settings, name='update_bot_settings'),
     path('update-bot-settings2/<int:bot_id>/', views.update_bot_settings2, name='update_bot_settings2'),
+    path("company-pdfs/", views.company_pdf_list, name="company_pdf_list"),
 
 ]
 
