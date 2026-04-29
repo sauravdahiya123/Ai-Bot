@@ -152,9 +152,17 @@ def get_urls(request):
 
     return JsonResponse({"status": True, "data": urls})
 
+import base64
 
-def chatbot_page(request, user_id):
+def chatbot_page(request, encoded_id):
     try:
+        encoded_id += '=' * (4 - len(encoded_id) % 4)
+
+        decoded = base64.urlsafe_b64decode(encoded_id).decode()
+
+        # अगर तुमने "user_4" encode किया था
+        user_id = decoded.split("_")[-1]
+
         user = User.objects.get(id=user_id)
         print("users",user)
         bot = CustomerBot.objects.filter(customer=user).first()

@@ -102,14 +102,18 @@ def toggle_store_data(request):
 
     return JsonResponse({"status": "error"})
 
+import base64
 
 def customer_setting(request):
     dashboard_user = User.objects.get(auth_user=request.user)
     bot = CustomerBot.objects.filter(customer=dashboard_user).first()
+
+    encoded = base64.urlsafe_b64encode(f"user_{dashboard_user.id}".encode()).decode()
+    encoded_id = encoded.rstrip("=")
     return render(request, "customer/settings.html", {
 
         "bot":bot,
-        "user_id":dashboard_user.id,
+        "user_id":encoded_id,
         "remaining":dashboard_user.requests_limit - dashboard_user.used_requests  ,
         "user":dashboard_user,
         'remaning_blance':dashboard_user.balance

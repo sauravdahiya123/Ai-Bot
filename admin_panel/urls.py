@@ -26,7 +26,7 @@ urlpatterns = [
     # path("verify-payment/", views.verify_payment),
     path("get-urls/", views.get_urls),
     path("add-url-page/", views.add_url_page,name="add_url_page"),
-    path("chatbot/<int:user_id>", views.chatbot_page),
+    path("chatbot/<str:encoded_id>", views.chatbot_page),
     path("api/", include("dashboard.urls")),
     path("", include("customer.urls")),
     path("verify-user/", views.verify_user),
