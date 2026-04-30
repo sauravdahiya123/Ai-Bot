@@ -468,28 +468,31 @@ function submitForm(){
 
 <script>
 
-let lastCount = 0;
+let shownMessages = new Set();
 let userMobile = sessionStorage.getItem("userMobile") || "";
 
 async function loadMessages() {
-    let res = await fetch(`${BASE_URL}/api/get-messages`);
+
+    if(!userMobile) return;
+
+    let res = await fetch(`${BASE_URL}/api/get-messages?phone=${userMobile}`);
     let data = await res.json();
 
     let box = document.getElementById("messages");
 
-    for (let i = lastCount; i < data.length; i++) {
-        let msg = data[i];
+    data.forEach(msg => {
 
-        // ✅ session wala mobile match
-        if (userMobile && msg.phone !== userMobile) continue;
-            addMessage("bot",msg.message);
+        // unique key (phone + message)
+        let key = msg.phone + "_" + msg.message;
 
-        // let div = document.createElement("div");
-        // div.innerText = msg.message;
-        // box.appendChild(div);
-    }
+        // ✅ already shown → skip
+        if (shownMessages.has(key)) return;
 
-    lastCount = data.length;
+        shownMessages.add(key);
+
+        addMessage("user", msg.message);
+    });
+
     box.scrollTop = box.scrollHeight;
 }
 

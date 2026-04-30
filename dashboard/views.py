@@ -523,5 +523,18 @@ def whatsapp_webhook(request):
 
 
 
+# views.py
+
 def get_messages(request):
-    return JsonResponse(CHAT_MESSAGES, safe=False)
+    phone = request.GET.get("phone", "")
+
+    if phone:
+        phone = phone[-10:]  # normalize
+
+    # ✅ sirf us number ke messages return karo
+    filtered = [
+        msg for msg in CHAT_MESSAGES
+        if not phone or msg["phone"] == phone
+    ]
+
+    return JsonResponse(filtered, safe=False)
