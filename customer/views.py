@@ -122,6 +122,7 @@ def customer_setting(request):
         "user_id":encoded_id,
         "remaining":dashboard_user.requests_limit - dashboard_user.used_requests  ,
         "user":dashboard_user,
+        "welcome_message":bot.welcome_message,
         'remaning_blance':dashboard_user.balance
     })
 

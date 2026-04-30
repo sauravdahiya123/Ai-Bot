@@ -10,4 +10,6 @@ urlpatterns = [
     path("ai-chatbot/", views.ai_chatbot_view, name="ai_chatbot"),
     path("voice-ask/", views.voice_ask, name="voice_ask"),
     path("upload-pdf/", views.upload_pdf, name="upload_pdf"),
+    path('api/leadofy_whatsapp_incoming.php', views.whatsapp_webhook),
+    path('get-messages', views.get_messages),
 ]

@@ -474,3 +474,54 @@ def upload_pdf(request):
         "users": users,
         "msg": msg
     })
+
+
+from datetime import datetime
+from django.conf import settings
+import os
+
+CHAT_MESSAGES = []
+
+@csrf_exempt
+def whatsapp_webhook(request):
+    if request.method == "POST":
+
+        # ✅ 1. RAW BODY (full JSON)
+        raw_body = request.body.decode("utf-8")
+
+        # ✅ 2. SAVE FULL JSON FIRST
+        log_path = os.path.join(settings.BASE_DIR, "webhook_log.txt")
+
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(f"\n===== {datetime.now()} =====\n")
+            f.write(raw_body + "\n")
+
+        # ✅ 3. NOW process data
+        try:
+            data = json.loads(raw_body)
+        except:
+            data = request.POST.dict()
+
+        print("📩 Incoming:", data)
+
+        # ✅ Extract fields
+        message = data.get("message") or data.get("text") or ""
+        phone = data.get("from") or data.get("mobile") or ""
+
+        if phone:
+            phone = phone[-10:]
+
+        # ✅ Store in memory (chatbot use)
+        CHAT_MESSAGES.append({
+            "phone": phone,
+            "message": message
+        })
+
+        return JsonResponse({"status": "received"})
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+
+def get_messages(request):
+    return JsonResponse(CHAT_MESSAGES, safe=False)

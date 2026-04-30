@@ -287,6 +287,26 @@ body {
 
 // 🔥 VISITOR ID (tracking ke liye)
 
+async function connectSalesAPI(mobile){
+
+    try{
+
+        await fetch("https://wasmsapi.leadofy.com/api/send-message", {
+            method: "POST",
+            headers: {                  
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                instance_id: "d1b61aa6-fa28-4789-90bc-7614f27ff81c",
+                to: "91" + mobile,
+                message: "New Lead: User wants to connect with sales. Mobile: " + mobile
+            })
+        });
+
+    }catch(e){
+        console.log("API Error", e);
+    }
+}
 
 function handleSalesResponse(choice,box){
     if(box){
@@ -294,12 +314,8 @@ function handleSalesResponse(choice,box){
     }
 
     if(choice === "Yes"){
-        addMessage("bot", "Great! Our sales team will contact you soon.");
-        
-        // 👉 optional API call
-        fetch(`${BASE_URL}/connect-sales`, {
-            method: "POST"
-        });
+        addMessage("bot", "📞 Please enter your mobile number to connect with sales:");
+        waitingForMobile = true;
 
     } else {
         addMessage("bot", "No problem 😊 Feel free to continue asking!");
@@ -451,7 +467,29 @@ function submitForm(){
 </script>
 
 <script>
-function showSalesOptions(message, options){
+
+async function loadMessages() {
+    let res = await fetch("/get-messages");
+    let data = await res.json();
+
+    let box = document.getElementById("messages");
+    box.innerHTML = "";
+
+    data.forEach(msg => {
+                addMessage("user", msg.message);
+
+        let div = document.createElement("div");
+        div.innerText = msg.phone + ": " + msg.message;
+        box.appendChild(div);
+
+    });
+}
+
+// auto refresh
+setInterval(loadMessages, 2000);
+
+function showSalesOptions(message, options = ["Yes", "No"]) {
+
     let div = document.getElementById("messages");
 
     let box = document.createElement("div");
@@ -461,14 +499,16 @@ function showSalesOptions(message, options){
     text.innerText = message;
     box.appendChild(text);
 
+    // ✅ safe fallback
+    options = Array.isArray(options) ? options : ["Yes", "No"];
+
     options.forEach(opt => {
         let btn = document.createElement("button");
         btn.innerText = opt;
 
-        if(opt === "Yes") btn.className = "yes-btn";
-        else btn.className = "no-btn";
+        btn.className = (opt === "Yes") ? "yes-btn" : "no-btn";
 
-        btn.onclick = () => handleSalesResponse(opt,box);
+        btn.onclick = () => handleSalesResponse(opt, box);
 
         box.appendChild(btn);
     });
@@ -535,9 +575,11 @@ function addMessage(type, text){
 }
 
 let SALES_AFTER = {{ sales_prompt_after|default:10 }};
-console.log("SALES_AFTER",SALES_AFTER)
+console.log("SALES_AFTER",SALES_AFTER);
 // 🔥 ASK API (FastAPI)
 var count  = 0;
+let waitingForMobile = false;
+
 async function ask(){
     count++;
     let input = document.getElementById("question");
@@ -548,14 +590,33 @@ async function ask(){
     addMessage("user", q);
     input.value = "";
 
+    if(waitingForMobile){
+
+        let mobile = q.replace(/\D/g, '');
+
+        if(mobile.length < 10){
+            addMessage("bot", "❌ Please enter valid mobile number");
+            return;
+        }
+
+        addMessage("bot", "⏳ Connecting you with sales...");
+
+        waitingForMobile = false;
+
+        // 🔥 API HIT
+        await connectSalesAPI(mobile);
+
+        addMessage("bot", "✅ Our sales team will contact you soon!");
+        return;
+    }
+
     let res = await fetch(`https://backbotv1.borgdesk.com/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
    // let res = await fetch(`http://127.0.0.1:8002/ask?q=${q}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
     let data = await res.json();
 
     addMessage("bot", data.answer);
     if(count == SALES_AFTER){
-        showSalesOptions(data.sales_message, data.options);
-    }
+        showSalesOptions("Would you like to connect with our sales team?");    }
 }
 
 // ✅ ENTER PRESS SUPPORT
