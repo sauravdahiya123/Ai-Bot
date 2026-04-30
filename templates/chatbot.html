@@ -482,10 +482,11 @@ async function loadMessages() {
 
         // ✅ session wala mobile match
         if (userMobile && msg.phone !== userMobile) continue;
+            addMessage("bot",msg.message);
 
-        let div = document.createElement("div");
-        div.innerText = msg.message;
-        box.appendChild(div);
+        // let div = document.createElement("div");
+        // div.innerText = msg.message;
+        // box.appendChild(div);
     }
 
     lastCount = data.length;
