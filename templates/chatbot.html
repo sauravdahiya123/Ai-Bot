@@ -469,7 +469,7 @@ function submitForm(){
 <script>
 
 async function loadMessages() {
-    let res = await fetch("/get-messages");
+    let res = await fetch("api/get-messages");
     let data = await res.json();
 
     let box = document.getElementById("messages");
