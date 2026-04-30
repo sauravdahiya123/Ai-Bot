@@ -468,21 +468,28 @@ function submitForm(){
 
 <script>
 
+let lastCount = 0;
+let userMobile = sessionStorage.getItem("userMobile") || "";
+
 async function loadMessages() {
     let res = await fetch(`${BASE_URL}/api/get-messages`);
     let data = await res.json();
 
     let box = document.getElementById("messages");
-    box.innerHTML = "";
 
-    data.forEach(msg => {
-                addMessage("user", msg.message);
+    for (let i = lastCount; i < data.length; i++) {
+        let msg = data[i];
+
+        // ✅ session wala mobile match
+        if (userMobile && msg.phone !== userMobile) continue;
 
         let div = document.createElement("div");
-        div.innerText = msg.phone + ": " + msg.message;
+        div.innerText = msg.message;
         box.appendChild(div);
+    }
 
-    });
+    lastCount = data.length;
+    box.scrollTop = box.scrollHeight;
 }
 
 // auto refresh
@@ -598,6 +605,7 @@ async function ask(){
             addMessage("bot", "❌ Please enter valid mobile number");
             return;
         }
+        sessionStorage.setItem("userMobile", mobile);
 
         addMessage("bot", "⏳ Connecting you with sales...");
 
