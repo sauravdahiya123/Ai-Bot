@@ -287,9 +287,10 @@ body {
 
 // 🔥 VISITOR ID (tracking ke liye)
 
-async function connectSalesAPI(mobile, message){
+async function connectSalesAPI(mobile){
 
     try{
+
         await fetch("https://wasmsapi.leadofy.com/api/send-message", {
             method: "POST",
             headers: {                  
@@ -298,7 +299,7 @@ async function connectSalesAPI(mobile, message){
             body: JSON.stringify({
                 instance_id: "d1b61aa6-fa28-4789-90bc-7614f27ff81c",
                 to: "91" + mobile,
-                message: message || "New Lead: User wants to connect with sales. Mobile: " + mobile
+                message: "New Lead: User wants to connect with sales. Mobile: " + mobile
             })
         });
 
@@ -470,9 +471,6 @@ function submitForm(){
 let shownMessages = new Set();
 let userMobile = sessionStorage.getItem("userMobile") || "";
 console.log("userMobile",userMobile);
-let processedMessages = new Set(
-    JSON.parse(sessionStorage.getItem("processedMessages") || "[]")
-);
 async function loadMessages() {
 
     if(!userMobile) return;
@@ -482,30 +480,22 @@ async function loadMessages() {
 
     let box = document.getElementById("messages");
 
-    for (let msg of data) {
+    data.forEach(msg => {
 
+        // unique key (phone + message)
         let key = msg.phone + "_" + msg.message;
 
-        if (processedMessages.has(key)) continue;
+        // ✅ already shown → skip
+        if (shownMessages.has(key)) return;
 
-        processedMessages.add(key);
-        sessionStorage.setItem(
-            "processedMessages",
-            JSON.stringify([...processedMessages])
-        );
+        shownMessages.add(key);
 
         addMessage("user", msg.message);
-
-        let aiReply = await getAIResponse(msg.message);
-
-        if(aiReply){
-            addMessage("bot", aiReply);
-            await connectSalesAPI(userMobile, aiReply);
-        }
-    }
+    });
 
     box.scrollTop = box.scrollHeight;
 }
+
 // auto refresh
 setInterval(loadMessages, 2000);
 
@@ -656,22 +646,6 @@ function startVoice() {
         ask();
     };
     recognition.start();
-}
-
-
-
-async function getAIResponse(message){
-
-    try{
-        let res = await fetch(`https://backbotv1.borgdesk.com/ask?q=${encodeURIComponent(message)}&vistor_id=${visitor_id}&api_key=${API_KEY}`);
-        let data = await res.json();
-
-        return data.answer || "";
-
-    }catch(e){
-        console.log("AI Error", e);
-        return "";
-    }
 }
 
 </script>
