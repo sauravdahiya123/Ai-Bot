@@ -1,0 +1,51 @@
+
+===== 2026-04-30 18:11:00.303797 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Hii","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC0015482F16EC94871546ED7D9589EF","created_at":"2026-04-30 23:41:00"}
+
+===== 2026-04-30 18:24:13.095214 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Demo testing","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC27E759A9C38F16FD5D96B51C75B8D4","created_at":"2026-04-30 23:54:12"}
+
+===== 2026-04-30 18:28:42.463499 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Demo saurav testing","message_type":"chat","wa_message_id":"false_918708114568@c.us_ACD38976205C3680F5A4BE0D7284AEF0","created_at":"2026-04-30 23:58:42"}
+
+===== 2026-04-30 18:31:06.912175 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919034264568","chat_jid":"98686067597403@lid","is_group":false,"group_id":null,"message":"Hii \ud83d\udc4b","message_type":"chat","wa_message_id":"false_98686067597403@lid_3AF66E85C213BB0D83A5","created_at":"2026-05-01 00:01:06"}
+
+===== 2026-04-30 18:39:23.715546 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Hii saurav","message_type":"chat","wa_message_id":"false_918708114568@c.us_ACC12A77FD51400BC71A631C50054ECE","created_at":"2026-05-01 00:09:23"}
+
+===== 2026-04-30 18:42:12.532302 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Hii","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC466174F440079601E1F1CA69D3BC04","created_at":"2026-05-01 00:12:12"}
+
+===== 2026-04-30 18:42:59.111425 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919034264568","chat_jid":"98686067597403@lid","is_group":false,"group_id":null,"message":"Hii \ud83d\udc4b","message_type":"chat","wa_message_id":"false_98686067597403@lid_3A357B7EEF7E40B1452C","created_at":"2026-05-01 00:12:59"}
+
+===== 2026-05-01 05:42:33.185872 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"*Task Aligned for the day* @253137168376004 \n1. Sales MIS Report  & Month Stat User - Received Amount Difference *In progress*\n2. Enhanced Incentive MIS Report - Zero Target not to be shown - *Working* \n3. Rename AL TL - Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1 *Working* \n4. Form is not working which is placed on this website https:\/\/esopcoin.co.in\/ integrate the form functionality there on this page.*In progress*\n5. a.The company name is not showing in the user account, whereas it is visible in the admin account.\n        b.While downloading the PI from the user account, clicking on \u201cSave as PDF\u201d opens the account login window. Also, when clicking on \u201cPrint,\u201d the values inside the PI appear blank.\n6. Permission for Manual Attendance Making in User \n7. Attendance link showing the data but not in ERP","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB0B041CFA70C25677849_274753369702411@lid","created_at":"2026-05-01 11:12:32"}
+
+===== 2026-05-01 05:44:27.950596 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"*issue while generating the PI through the user account*\n1.The company name is not showing in the user account, whereas it is visible in the admin account.\n2.While downloading the PI from the user account, clicking on \u201cSave as PDF\u201d opens the account login window. Also, when clicking on \u201cPrint,\u201d the values inside the PI appear blank.","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB04F744A39D95F942561_274753369702411@lid","created_at":"2026-05-01 11:14:27"}
+
+===== 2026-05-01 05:44:51.369635 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"muds \/ nirmal \/ 01May","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB06BE5F07E7EACFE6C91_274753369702411@lid","created_at":"2026-05-01 11:14:51"}
+
+===== 2026-05-01 05:47:38.456501 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Ma\u2019am, should I create both a ticket and a task, or only the task?","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB03487D0793E361BD746_112446689775859@lid","created_at":"2026-05-01 11:17:38"}
+
+===== 2026-05-01 05:51:38.638076 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Hello","message_type":"chat","wa_message_id":"false_918708114568@c.us_ACD9668C706877393F6BCB34BBD29484","created_at":"2026-05-01 11:21:38"}
+
+===== 2026-05-01 05:52:08.841036 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Muje muds k bare m btao","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC91E5F885D2673F69DDC4A782A356FA","created_at":"2026-05-01 11:22:08"}
+
+===== 2026-05-01 05:54:42.420472 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"ticket id: 12813 *issue while generating the PI through the user account* Done\ntask id : 10246 *issue while generating the PI through the user account* Done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB03300C2CF6E6BEC6CEC_112446689775859@lid","created_at":"2026-05-01 11:24:42"}
+
+===== 2026-05-01 05:56:56.132730 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Rename AL TL-Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB044B481FF1F1759CEC3_274753369702411@lid","created_at":"2026-05-01 11:26:55"}
+
+===== 2026-05-01 05:57:18.175439 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"muds ticket \/ nirmal\/devanshu\/ 1may","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB042A7ACF7E967CBC810_274753369702411@lid","created_at":"2026-05-01 11:27:18"}
+
+===== 2026-05-01 06:02:55.556225 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Ticket id: 12814 Rename AL TL-Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1 Done \nTask Id : 10247 Rename AL TL-Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1 done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0611FBE1B5E7D4A052B_112446689775859@lid","created_at":"2026-05-01 11:32:55"}

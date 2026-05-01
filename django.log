@@ -1,440 +1,50 @@
 nohup: ignoring input
-[2026-04-29 17:00:58 +0000] [2926337] [INFO] Starting gunicorn 25.3.0
-[2026-04-29 17:00:58 +0000] [2926337] [INFO] Listening at: http://127.0.0.1:8000 (2926337)
-[2026-04-29 17:00:58 +0000] [2926337] [INFO] Using worker: sync
-[2026-04-29 17:00:58 +0000] [2926339] [INFO] Booting worker with pid: 2926339
-[2026-04-29 17:00:58 +0000] [2926340] [INFO] Booting worker with pid: 2926340
-[2026-04-29 17:00:58 +0000] [2926341] [INFO] Booting worker with pid: 2926341
-[2026-04-29 17:00:58 +0000] [2926337] [INFO] Control socket listening at /run/user/0/gunicorn.ctl
-Not Found: /.git/config
-Not Found: /.env
-Not Found: /cgi-bin/authLogin.cgi
-Not Found: /favicon.ico
-Not Found: /phpmyadmin/index.php
-Not Found: /pmd/index.php
-Not Found: /phpmyadmin4.8.5/index.php
-Internal Server Error: /customer_setting/
+[2026-05-01 06:03:27 +0000] [3488569] [INFO] Starting gunicorn 25.3.0
+[2026-05-01 06:03:27 +0000] [3488569] [INFO] Listening at: http://127.0.0.1:8000 (3488569)
+[2026-05-01 06:03:27 +0000] [3488569] [INFO] Using worker: sync
+[2026-05-01 06:03:27 +0000] [3488571] [INFO] Booting worker with pid: 3488571
+[2026-05-01 06:03:27 +0000] [3488572] [INFO] Booting worker with pid: 3488572
+[2026-05-01 06:03:27 +0000] [3488573] [INFO] Booting worker with pid: 3488573
+[2026-05-01 06:03:28 +0000] [3488569] [INFO] Control socket listening at /run/user/0/gunicorn.ctl
+Internal Server Error: /chatbot/dXNlcl8x
+Traceback (most recent call last):
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such column: dashboard_customerbot.instance_id
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/var/www/html/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
     response = get_response(request)
   File "/var/www/html/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "/home/aibot/public_html/customer/views.py", line 114, in customer_setting
-    dashboard_user = User.objects.get(auth_user=request.user)
-  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/query.py", line 635, in get
-    raise self.model.DoesNotExist(
-dashboard.models.User.DoesNotExist: User matching query does not exist.
-Not Found: /anthropic/v1/models
-Not Found: /.env
-Not Found: /.env
-Not Found: /developmentserver/metadatauploader
-Not Found: /RDWeb/Pages/en-US/login.aspx
-Not Found: /hello.world
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
-Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /index.php
-Not Found: /public/index.php
-Not Found: /index.php
-Not Found: /index.php
-Not Found: /containers/json
-Not Found: /.env
-Not Found: /ems/cgi-bin/ezrf_upgrade_images.cgi
-Not Found: /api/fabric/device/status
-Not Found: /remote/fgt_lang
-Not Found: /login
-Not Found: /configWizard/keyUpload.jsp
-Not Found: /cgi-bin/authLogin.cgi
-Not Found: /api/v1/init_consts
-Not Found: /api/v1/init_consts
-Not Found: /Config/SaveUploadedHotspotLogoFile
-Not Found: /Assets/temp/hotspot/img/logohotspot.txt
-Not Found: /api/v2/cmdb/system/admin
-Not Found: /api/v2/cmdb/system/admin/admin
-Not Found: /api/v1/fabric_device_auth/fortigate/init
-Not Found: /api/v1/fabric_device_auth/fortigate/init
-Not Found: /.well-known/security.txt
-Not Found: /.git/config
-Not Found: /favicon.ico
-Not Found: /favicon.ico
-Not Found: /.env
-Not Found: /v1/models
-Not Found: /mcp
-Not Found: /.well-known/mcp.json
-Not Found: /.well-known/agent.json
-Not Found: /invocations
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /.env
-Not Found: /.env
-Not Found: /.env
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /favicon.ico
-Not Found: /.env
-Not Found: /hello.world
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
-Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /index.php
-Not Found: /public/index.php
-Not Found: /index.php
-Not Found: /index.php
-Not Found: /containers/json
-Not Found: /.env
-Not Found: /.env
-Not Found: /mcp
-Not Found: /sse
-Not Found: /favicon.ico
-Not Found: /hello.world
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
-Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /index.php
-Not Found: /public/index.php
-Not Found: /index.php
-Not Found: /index.php
-Not Found: /containers/json
-Not Found: /favicon.ico
-Not Found: /.env
-Not Found: /actuator/gateway/routes
-Not Found: /.env
-Not Found: /.env
-Not Found: /.env.local
-Not Found: /.env.production
-Not Found: /.env.development
-Not Found: /.env.dev
-Not Found: /.env.prod
-Not Found: /.env.test
-Not Found: /.env.staging
-Not Found: /.env.backup
-Not Found: /.env.save
-Not Found: /.env.old
-Not Found: /.env.bak
-Not Found: /.env.tmp
-Not Found: /.env.swp
-Not Found: /.env~
-Not Found: /.env.example
-Not Found: /.env.sample
-Not Found: /.env.dist
-Not Found: /.env.template
-Not Found: /.env.production.local
-Not Found: /.env.development.local
-Not Found: /.env.test.local
-Not Found: /.envrc
-Not Found: /.flaskenv
-Not Found: /env
-Not Found: /env.js
-Not Found: /env.json
-Not Found: /app/.env
-Not Found: /src/.env
-Not Found: /config/.env
-Not Found: /backend/.env
-Not Found: /frontend/.env
-Not Found: /api/.env
-Not Found: /server/.env
-Not Found: /client/.env
-Not Found: /web/.env
-Not Found: /public/.env
-Not Found: /private/.env
-Not Found: /var/.env
-Not Found: /docker-compose.yml
-Not Found: /docker-compose.yaml
-Not Found: /docker-compose.override.yml
-Not Found: /docker-compose.dev.yml
-Not Found: /docker-compose.prod.yml
-Not Found: /config.js
-Not Found: /config.json
-Not Found: /settings.js
-Not Found: /settings.json
-Not Found: /secrets.json
-Not Found: /credentials.json
-Not Found: /app.js
-Not Found: /main.js
-Not Found: /index.js
-Not Found: /server.js
-Not Found: /bundle.js
-Not Found: /app.bundle.js
-Not Found: /main.bundle.js
-Not Found: /vendor.js
-Not Found: /chunk.js
-Not Found: /dist/main.js
-Not Found: /dist/app.js
-Not Found: /dist/bundle.js
-Not Found: /build/static/js/main.js
-Not Found: /assets/index.js
-Not Found: /assets/app.js
-Not Found: /_next/static/chunks/main.js
-Not Found: /_next/static/chunks/app.js
-Not Found: /js/app.js
-Not Found: /js/main.js
-Not Found: /settings.py
-Not Found: /config.py
-Not Found: /secrets.py
-Not Found: /config/secrets.yml
-Not Found: /config/master.key
-Not Found: /wp-config.php.bak
-Not Found: /wp-config.php.old
-Not Found: /wp-config.php.save
-Not Found: /wp-config.php.txt
-Not Found: /wp-config.php~
-Not Found: /config/app.php
-Not Found: /application.properties
-Not Found: /application.yml
-Not Found: /application.yaml
-Not Found: /application-dev.properties
-Not Found: /application-prod.properties
-Not Found: /appsettings.json
-Not Found: /appsettings.Development.json
-Not Found: /appsettings.Production.json
-Not Found: /config.yaml
-Not Found: /config.yml
-Not Found: /config.toml
-Not Found: /serverless.yml
-Not Found: /serverless.yaml
-Not Found: /config/production.json
-Not Found: /config/development.json
-Not Found: /config/default.json
-Not Found: /config/local.json
-Not Found: /conf/settings.json
-Not Found: /data/config.json
-Not Found: /actuator/env
-Not Found: /actuator/configprops
-Not Found: /api/config
-Not Found: /api/settings
-Not Found: /api/env
-Not Found: /backup/.env
-Not Found: /backups/.env
-Not Found: /old/.env
-Not Found: /temp/.env
-Not Found: /tmp/.env
-Not Found: /.streamlit/secrets.toml
-Not Found: /root/.streamlit/secrets.toml
-Not Found: /root/.aws/credentials
-Not Found: /home/ubuntu/.aws/credentials
-Not Found: /home/ec2-user/.aws/credentials
-Not Found: /home/node/.aws/credentials
-Not Found: /terraform.tfvars
-Not Found: /terraform.tfstate
-Not Found: /ecosystem.config.js
-Not Found: /secrets.yaml
-Not Found: /secrets.yml
-Not Found: /.secrets
-Not Found: /.env.vault
-Not Found: /.aws/credentials
-Not Found: /.aws/config
-Not Found: /.docker/config.json
-Not Found: /storage/framework/.env
-Not Found: /laravel/.env
-Not Found: /debug/vars
-Not Found: /.git/logs/HEAD
-Not Found: /.git/config
-Not Found: /.azure/credentials
-Not Found: /.azure/accessTokens.json
-Not Found: /.azure/azureProfile.json
-Not Found: /root/.azure/credentials
-Not Found: /root/.azure/accessTokens.json
-Not Found: /home/ubuntu/.azure/credentials
-Not Found: /home/node/.azure/credentials
-Not Found: /azure-credentials.json
-Not Found: /azure.json
-Not Found: /service-principal.json
-Not Found: /.gcp/credentials.json
-Not Found: /.gcp/service-account.json
-Not Found: /gcp-credentials.json
-Not Found: /gcp-service-account.json
-Not Found: /service-account.json
-Not Found: /google-credentials.json
-Not Found: /google-cloud-key.json
-Not Found: /firebase-adminsdk.json
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /.git/config
-Not Found: /webui/
-Not Found: /hello.world
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
-Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
-Not Found: /favicon.ico
-Not Found: /geoserver/web/
-Not Found: /.git/config
-Not Found: /Dr0v
-Not Found: /favicon.ico
-Not Found: /favicon.ico
-Not Found: /favicon.ico
-Not Found: /sitemap.xml
-Not Found: /.env
-Not Found: /.env
-Not Found: /.env
-Not Found: /.env
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /hello.world
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
-Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
-Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
-Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
-Not Found: /index.php
-Not Found: /public/index.php
-Not Found: /index.php
-Not Found: /index.php
-Not Found: /containers/json
-Not Found: /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application
-Not Found: /.env
-Not Found: /api/.env
-Not Found: /app/.env
-Not Found: /.env
-Not Found: /.env.local
-Not Found: /.env
-Not Found: /.env
-Forbidden (Referer checking failed - no Referer.): /
-Not Found: /.git/index
-Not Found: /actuator/gateway/routes
-Not Found: /favicon.ico
-Not Found: /robots.txt
-Not Found: /login
+  File "/home/aibot/public_html/dashboard/views.py", line 168, in chatbot_page
+    bot = CustomerBot.objects.filter(customer=user).first()
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1106, in first
+    for obj in queryset[:1]:
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/query.py", line 386, in __iter__
+    self._fetch_all()
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/html/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such column: dashboard_customerbot.instance_id
