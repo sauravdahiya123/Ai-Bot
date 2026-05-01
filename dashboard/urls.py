@@ -12,4 +12,5 @@ urlpatterns = [
     path("upload-pdf/", views.upload_pdf, name="upload_pdf"),
     path('leadofy_whatsapp_incoming', views.whatsapp_webhook),
     path('get-messages', views.get_messages),
+    path("voice-chat/", views.voice_chat),
 ]

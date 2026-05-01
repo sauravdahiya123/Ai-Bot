@@ -196,259 +196,20 @@ body {
 </div>
 
 
-<style>
-    .voice-btn {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: #25D366;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    padding: 0 !important;
-}
-
-.voice-btn.recording {
-    background: red;
-}
-
-/* 🔥 heartbeat pulse */
-.pulse {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background: rgba(255,0,0,0.4);
-    animation: pulse 1s infinite;
-    display: none;
-}
-
-.voice-btn.recording .pulse {
-    display: block;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.3); opacity: 0.2; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
-</style>
     
 
     <div id="messages"></div>
 
    <div id="inputArea">
 
-<button id="recordBtn" class="voice-btn">
-    🎤
-    <span class="pulse"></span>
-</button>
+    <!-- <button class="icon-btn" onclick="startVoice()">🎤</button> -->
+
     <input id="question" placeholder="Type your message..." />
 
     <button class="send-btn" onclick="ask()">➤</button>
 
     </div>
 
-
-    <style>
-        audio {
-    width: 100%;
-    max-width: 220px;
-}
-
-.user audio {
-    margin-left: auto;
-}
-
-.bot audio {
-    margin-right: auto;
-}
-    </style>
-<script>
-function addAudioMessage(type, audioUrl){
-
-    let div = document.getElementById("messages");
-    console.log("saurav",div);
-    let msg = document.createElement("div");
-    msg.className = type;
-
-    // 🔥 wrapper (important for styling)
-    let bubble = document.createElement("div");
-    bubble.style.padding = "8px";
-    bubble.style.borderRadius = "10px";
-    bubble.style.margin = "5px";
-
-    if(type === "user"){
-        bubble.style.background = "#007bff";
-        bubble.style.textAlign = "right";
-    }else{
-        bubble.style.background = "#333";
-    }
-
-    let audio = document.createElement("audio");
-    audio.controls = true;
-    audio.src = audioUrl;
-
-    // 🔥 important styling
-    audio.style.width = "220px";
-    audio.style.display = "block";
-
-    bubble.appendChild(audio);
-    msg.appendChild(bubble);
-
-    div.appendChild(msg);
-    div.scrollTop = div.scrollHeight;
-}
-// =======================
-// 🔥 VARIABLES
-// =======================
-let mediaRecorder;
-let audioChunks = [];
-let stream;
-
-const recordBtn = document.getElementById("recordBtn");
-
-recordBtn.addEventListener("click", toggleRecording);
-
-let isRecording = false;
-
-// =======================
-async function toggleRecording(){
-
-    if(!isRecording){
-        await startRecording();
-    } else {
-        stopRecording();
-    }
-}
-
-
-// =======================
-// 🎤 START RECORDING
-// =======================
-async function startRecording(){
-
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-    mediaRecorder = new MediaRecorder(stream);
-    audioChunks = [];
-
-    mediaRecorder.ondataavailable = e => {
-        if(e.data.size > 0){
-            audioChunks.push(e.data);
-        }
-    };
-
-    mediaRecorder.onstop = async () => {
-
-        const audioBlob = new Blob(audioChunks, {
-            type: "audio/webm; codecs=opus"
-        });
-
-        let url = URL.createObjectURL(audioBlob);
-
-        // 👤 show user audio
-        addAudioMessage("user", url);
-
-        // send to backend
-        await sendAudioToServer(audioBlob);
-    };
-
-    mediaRecorder.start();
-
-    isRecording = true;
-
-    recordBtn.classList.add("recording");
-
-    // addMessage("bot", "🎤 Recording... बोलना शुरू करें");
-}
-
-// =======================
-// ⏹ STOP
-// =======================
-function stopRecording(){
-
-    if(mediaRecorder && mediaRecorder.state !== "inactive"){
-        mediaRecorder.stop();
-    }
-
-    if(stream){
-        stream.getTracks().forEach(track => track.stop());
-    }
-
-    isRecording = false;
-
-    recordBtn.classList.remove("recording");
-
-    // addMessage("bot", "⏹ Recording stopped");
-}
-
-// =======================
-// 🎤 BUTTON CLICK
-// =======================
-function startVoice(){
-    startRecording();
-}
-// =======================
-// ⏹️ STOP RECORDING
-// =======================
-
-
-// =======================
-// 🚀 SEND AUDIO TO SERVER
-// =======================
-let API_KEY1 = "{{ api_key }}"; // 👈 important
-
-async function sendAudioToServer(audioBlob){
-
-    try{
-        // 👇 USER AUDIO SHOW (local blob)
-        let userAudioURL = URL.createObjectURL(audioBlob);
-        // console.log("Audio Blob:", audioBlob);
-        // console.log("Size:", audioBlob.size);
-        // console.log("url:", userAudioURL);
-        
-        // addAudioMessage("user", userAudioURL);
-
-        let formData = new FormData();
-        formData.append("audio", audioBlob, "voice.webm");
-
-        let res = await fetch(`${BASE_URL}/api/voice-chat/`, {
-            method: "POST",
-             headers: {
-                "X-API-KEY": API_KEY1
-            },
-            body: formData
-        });
-
-        let data = await res.json();
-
-        console.log("Response:", data);
-
-        // 🤖 BOT TEXT SHOW
-        // if(data.reply){
-        //     addMessage("bot", data.reply);
-        // }
-
-        // 🔊 BOT AUDIO SHOW
-        if(data.audio_url){
-            addAudioMessage("bot", data.audio_url);
-
-            // auto play
-            let audio = new Audio(data.audio_url);
-            // audio.play();
-        }
-
-    }catch(e){
-        console.log("Voice API Error:", e);
-    }
-}
-
-</script>
 
 <style>
 
@@ -881,7 +642,6 @@ async function ask(){
     let data = await res.json();
 
     addMessage("bot", data.answer);
-    speak(data.answer);
     if(count == SALES_AFTER){
         showSalesOptions("Would you like to connect with our sales team?");    }
 }
@@ -892,6 +652,17 @@ document.getElementById("question").addEventListener("keypress", function(e) {
         ask();
     }
 });
+
+// 🎤 VOICE INPUT
+function startVoice() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.onresult = function(event) {
+        document.getElementById("question").value = event.results[0][0].transcript;
+        ask();
+    };
+    recognition.start();
+}
+
 
 
 async function getAIResponse(message){

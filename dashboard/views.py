@@ -539,3 +539,69 @@ def get_messages(request):
     ]
 
     return JsonResponse(filtered, safe=False)
+
+
+
+from gtts import gTTS
+import speech_recognition as sr
+from pydub import AudioSegment
+
+@csrf_exempt
+def voice_chat(request):
+    if request.method == "POST":
+
+        audio_file = request.FILES.get("audio")
+        api_key = request.headers.get("X-API-KEY")
+        if not audio_file:
+            return JsonResponse({"error": "No audio"}, status=400)
+
+        # save webm
+        webm_path = os.path.join(settings.MEDIA_ROOT, "input.webm")
+
+        with open(webm_path, "wb+") as f:
+            for chunk in audio_file.chunks():
+                f.write(chunk)
+
+        # 🔥 convert to wav
+        wav_path = os.path.join(settings.MEDIA_ROOT, "input.wav")
+
+        audio = AudioSegment.from_file(webm_path, format="webm")
+        audio.export(wav_path, format="wav")
+
+        # 🔥 speech to text
+        recognizer = sr.Recognizer()
+
+        try:
+            with sr.AudioFile(wav_path) as source:
+                audio_data = recognizer.record(source)
+                text = recognizer.recognize_google(audio_data)
+
+        except Exception as e:
+            print("Speech error:", e)
+            text = ""
+
+        print("TEXT:", text)
+        import requests
+        ai_res = requests.get(
+            "https://backbotv1.borgdesk.com/ask",
+            params={"q": text,
+                                        "vistor_id": "voice-user",
+                                        "api_key": api_key
+                                        }
+        )
+        ai_data = ai_res.json()
+        answer = ai_data.get("answer", "Sorry, I didn’t understand.")
+
+        # 🔥 3. Text → MP3
+        output_path = os.path.join(settings.MEDIA_ROOT, "reply.mp3")
+
+        tts = gTTS(answer, lang="en")
+        tts.save(output_path)
+
+        audio_url = request.build_absolute_uri(settings.MEDIA_URL + "reply.mp3")
+
+        return JsonResponse({
+            "text": text,
+            "reply": answer,
+            "audio_url": audio_url
+        })
