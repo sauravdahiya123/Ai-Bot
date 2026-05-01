@@ -286,8 +286,12 @@ body {
 // 🔥 AUTO API KEY (Django se aayega)
 
 // 🔥 VISITOR ID (tracking ke liye)
+let instance_id = "{{ instance_id|default:''|escapejs }}";
 
 async function connectSalesAPI(mobile, message){
+    if(!instance_id){
+        console.warn("⚠️ Instance ID missing");
+    }
 
     try{
         await fetch("https://wasmsapi.leadofy.com/api/send-message", {
@@ -296,9 +300,9 @@ async function connectSalesAPI(mobile, message){
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                instance_id: "d1b61aa6-fa28-4789-90bc-7614f27ff81c",
+                instance_id: instance_id,
                 to: "91" + mobile,
-                message: message || "New Lead: User wants to connect with sales. Mobile: " + mobile
+                message: message || "Hi there! I'm here to assist you. How can I help you today?"
             })
         });
 
@@ -540,6 +544,7 @@ function showSalesOptions(message, options = ["Yes", "No"]) {
 </script>
 
 <script>
+
 
 // 🔥 AUTO API KEY (Django se inject hoga)
 let API_KEY = "{{ api_key }}"; // 👈 important

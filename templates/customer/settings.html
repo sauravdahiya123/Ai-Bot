@@ -140,6 +140,17 @@
                    class="form-control">
         </div>
 
+        
+        <div class="mb-2">
+            <label class="form-label">Instance ID</label>
+            <input type="text"
+                id="instanceId"
+                data-bot-id="{{ bot.id }}"
+                value="{{ bot.instance_id|default:'' }}"
+                class="form-control"
+                placeholder="Enter Instance ID">
+        </div>
+
 
         <!-- ✅ Message -->
         <div id="msg" class="text-success mt-2" style="display:none;">
@@ -231,6 +242,7 @@
 const languageSelect = document.getElementById("languageSelect");
 const themeColor = document.getElementById("themeColor");
 const salesPromptAfter = document.getElementById("salesPromptAfter");
+const instanceId = document.getElementById("instanceId");
 const msg = document.getElementById("msg");
 
 function updateBotSettings() {
@@ -245,7 +257,9 @@ function updateBotSettings() {
         body: JSON.stringify({
             language: languageSelect.value,
             theme_color: themeColor.value,
-            sales_prompt_after: salesPromptAfter.value
+            sales_prompt_after: salesPromptAfter.value,
+            instance_id: instanceId.value   // ✅ NEW FIELD
+
         })
     })
     .then(res => res.json())
@@ -258,6 +272,7 @@ function updateBotSettings() {
 // languageSelect.addEventListener("change", updateBotSettings);
 themeColor.addEventListener("change", updateBotSettings);
 salesPromptAfter.addEventListener("change", updateBotSettings);
+instanceId.addEventListener("change", updateBotSettings);
 
 
 

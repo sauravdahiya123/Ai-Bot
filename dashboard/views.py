@@ -173,6 +173,7 @@ def chatbot_page(request, encoded_id):
         return render(request, "chatbot.html", {
             "api_key": user.api_key,
             "bot":bot,
+            "instance_id":bot.instance_id,
             "sales_prompt_after": bot.sales_prompt_after if bot else 10,
             "store_data": store_data   # 🔥 important
         })

@@ -360,6 +360,7 @@ def update_bot_settings2(request, bot_id):
         bot.language = data.get("language", bot.language)
         bot.theme_color = data.get("theme_color", bot.theme_color)
         bot.sales_prompt_after = data.get("sales_prompt_after", bot.sales_prompt_after)
+        bot.instance_id = data.get("instance_id",bot.instance_id)  # ✅ NEW
 
         bot.save()
 

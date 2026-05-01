@@ -62,6 +62,8 @@ class CustomerBot(models.Model):
     welcome_message = models.TextField(default="Hi 👋 How can I help you?")
     theme_color = models.CharField(max_length=20, default="#0d6efd")
     sales_prompt_after = models.IntegerField(default=10)
+    instance_id = models.CharField(max_length=20,null=True, blank=True)
+
 
 
 
