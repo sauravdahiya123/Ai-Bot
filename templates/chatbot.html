@@ -881,7 +881,6 @@ async function ask(){
     let data = await res.json();
 
     addMessage("bot", data.answer);
-    speak(data.answer);
     if(count == SALES_AFTER){
         showSalesOptions("Would you like to connect with our sales team?");    }
 }
