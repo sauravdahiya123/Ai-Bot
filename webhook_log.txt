@@ -49,3 +49,153 @@
 
 ===== 2026-05-01 06:02:55.556225 =====
 {"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Ticket id: 12814 Rename AL TL-Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1 Done \nTask Id : 10247 Rename AL TL-Heirarchy level till 6 to create > L6\/L5\/L4\/L3\/L2\/L1 done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0611FBE1B5E7D4A052B_112446689775859@lid","created_at":"2026-05-01 11:32:55"}
+
+===== 2026-05-01 06:11:29.919059 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Form is not working which is placed on this website https:\/\/esopcoin.co.in\/\nplease integrate the form functionality there on this page.","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0370C34FAB77F4DBD14_274753369702411@lid","created_at":"2026-05-01 11:41:29"}
+
+===== 2026-05-01 06:11:48.222628 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"muds \/ ticket\/nirmal \/1 may","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0C30E92B5F8C2BC5F7A_274753369702411@lid","created_at":"2026-05-01 11:41:48"}
+
+===== 2026-05-01 06:17:07.937628 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"ticket id: 12815 Form is not working which is placed on this website  Done\ntaskid: 10249 Form is not working which is placed on this website Done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB066755A19C4D3A8D344_112446689775859@lid","created_at":"2026-05-01 11:47:07"}
+
+===== 2026-05-01 06:56:32.054531 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919911222771","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"for point no 2 --Enhanced Incentive MIS -Show in new Link -Name -Monthly Sales Driver","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB0466404315B081F6357_125035087954130@lid","created_at":"2026-05-01 12:26:31"}
+
+===== 2026-05-01 06:56:41.671678 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919911222771","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"do not edit current report","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB0E2D026FDE5E5DAAAEF_125035087954130@lid","created_at":"2026-05-01 12:26:41"}
+
+===== 2026-05-01 06:56:58.741935 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919101121227","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"@274753369702411 mam,As discussed with Nirmal Sir in yesterday\u2019s meeting, I informed him that Ticket ID 32936 B is not showing in the Stage Status Master.","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB006BC4D5E00647048A4_253137168376004@lid","created_at":"2026-05-01 12:26:58"}
+
+===== 2026-05-01 06:57:06.236160 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919911222771","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"@253137168376004 show me yesterday development","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB01063DA13639BDE713E_125035087954130@lid","created_at":"2026-05-01 12:27:06"}
+
+===== 2026-05-01 06:59:38.691197 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919101121227","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"Noted mam","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_AC1BA9C8913FA3F3649FE93801528FF1_253137168376004@lid","created_at":"2026-05-01 12:29:38"}
+
+===== 2026-05-01 07:01:11.978876 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"30th April","message_type":"document","wa_message_id":"false_120363191289497457@g.us_3EB0E404F6DD974E9DF07F_274753369702411@lid","created_at":"2026-05-01 12:31:11"}
+
+===== 2026-05-01 07:01:30.554958 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"@112446689775859 pls check n update in sheet .","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB06A49F5704A42F163F1_274753369702411@lid","created_at":"2026-05-01 12:31:30"}
+
+===== 2026-05-01 07:02:03.307468 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"pls hand over sheet in second half for approval .","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0D4D60CA016CABD2ACB_274753369702411@lid","created_at":"2026-05-01 12:32:03"}
+
+===== 2026-05-01 07:02:03.870279 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"@274753369702411 Sure mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0A12DFD09E7AF5B32C7_112446689775859@lid","created_at":"2026-05-01 12:32:03"}
+
+===== 2026-05-01 07:02:26.194803 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"@274753369702411 Sure mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0CFCB5F56219A0C65BE_112446689775859@lid","created_at":"2026-05-01 12:32:26"}
+
+===== 2026-05-01 07:06:08.188052 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"*Enhanced Incentive MIS Report - Zero Target not to be shown* \n\nTo show Enhanced Incentive MIS -Show in new Link \nName - *Monthly Sales Driver*","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0EF3C8904D24F187A21_274753369702411@lid","created_at":"2026-05-01 12:36:08"}
+
+===== 2026-05-01 07:06:22.531818 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"muds \/ nirmal\/ 2 may","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0A8E9A21BE6D563703B_274753369702411@lid","created_at":"2026-05-01 12:36:22"}
+
+===== 2026-05-01 07:07:05.982343 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"@274753369702411 Ma\u2019am, I\u2019m having difficulty understanding the Vehicle Master bulk upload. I\u2019m unable to confirm whether the data has been uploaded successfully, and I\u2019m also unclear about the fields. Could you please review and test this from your end?","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB08F7CDF4F70D90875B4_112446689775859@lid","created_at":"2026-05-01 12:37:05"}
+
+===== 2026-05-01 07:09:24.482160 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"have you checked workflow ?","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0E7BD08FF3035C2FA16_274753369702411@lid","created_at":"2026-05-01 12:39:24"}
+
+===== 2026-05-01 07:10:51.795822 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"yes Mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB07E9E33F9E5B9F920E4_112446689775859@lid","created_at":"2026-05-01 12:40:51"}
+
+===== 2026-05-01 07:12:47.284822 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Ticket id: 12816 *Enhanced Incentive MIS Report - Zero Target not to be shown* Done\nTask Id: 10250 *Enhanced Incentive MIS Report - Zero Target not to be shown* Done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0DFA178C38771C4E735_112446689775859@lid","created_at":"2026-05-01 12:42:47"}
+
+===== 2026-05-01 07:14:37.861805 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"If you have uploaded Vehicle master , then entries will be automatically mapped in further process . \n*make entries to complete 1 cycle of any 1 Trip* \n\ndata uploaded or not \u26a0\ufe0f\nFields not clear \u26a0\ufe0f","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB07E8973AC3C5C617002_274753369702411@lid","created_at":"2026-05-01 12:44:37"}
+
+===== 2026-05-01 07:24:49.410752 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Sure Mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB037F3C4EDBBA6057A4B_112446689775859@lid","created_at":"2026-05-01 12:54:49"}
+
+===== 2026-05-01 07:46:17.451628 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919911222771","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"yes","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB07472AFBB604F8DAFB0_125035087954130@lid","created_at":"2026-05-01 13:16:17"}
+
+===== 2026-05-01 08:01:20.830171 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"We had done the major development yesterday against this requirement . \non the basis of the above mentioned conditions , Borgteam has done the needful. \n@253137168376004 pls create *HOLD FOR STAMP PAPER - button in stage 3*","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB02C6ECFF0FA77F20BA8_274753369702411@lid","created_at":"2026-05-01 13:31:20"}
+
+===== 2026-05-01 08:03:23.807416 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Hii demo","message_type":"chat","wa_message_id":"false_918708114568@c.us_3EB0DE4C2B5C783461DA24","created_at":"2026-05-01 13:33:23"}
+
+===== 2026-05-01 08:10:46.639513 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Saurav testing","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC1FFB1A13DC51CAF014E9F72DF7AE0B","created_at":"2026-05-01 13:40:46"}
+
+===== 2026-05-01 08:11:12.227959 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Borg k bare m btao","message_type":"chat","wa_message_id":"false_918708114568@c.us_ACC2F2A894EB377B4912D18B9A846C1D","created_at":"2026-05-01 13:41:12"}
+
+===== 2026-05-01 08:12:03.588548 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918708114568","chat_jid":"918708114568@c.us","is_group":false,"group_id":null,"message":"Borg company k bare m btao","message_type":"chat","wa_message_id":"false_918708114568@c.us_AC1BF01FE193852DCF173809EE48A274","created_at":"2026-05-01 13:42:03"}
+
+===== 2026-05-01 08:31:49.766156 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919999191623","chat_jid":"919999191623@c.us","is_group":false,"group_id":null,"message":"Payment link please","message_type":"chat","wa_message_id":"false_919999191623@c.us_AC3DD323AD2DBC9101E3332F05339E3D","created_at":"2026-05-01 14:01:49"}
+
+===== 2026-05-01 08:44:01.517076 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919999191623","chat_jid":"919999191623@c.us","is_group":false,"group_id":null,"message":"Done","message_type":"chat","wa_message_id":"false_919999191623@c.us_AC5954BE3B76FDBCAD575005F6366653","created_at":"2026-05-01 14:14:01"}
+
+===== 2026-05-01 08:58:10.917177 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919101121227","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"UPDATED MAM.","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB0C180FFAE4670672D08_253137168376004@lid","created_at":"2026-05-01 14:28:10"}
+
+===== 2026-05-01 09:28:16.364876 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"muds sheet all done ?","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB05A1A9D5151D123ABA0_274753369702411@lid","created_at":"2026-05-01 14:58:16"}
+
+===== 2026-05-01 09:28:27.871207 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"with all tasks comments ?","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0202055E7A14F55BDDE_274753369702411@lid","created_at":"2026-05-01 14:58:27"}
+
+===== 2026-05-01 09:28:54.260377 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Yes Mam Please check and let me know","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB03AF2FBFFEAE07846AA_112446689775859@lid","created_at":"2026-05-01 14:58:54"}
+
+===== 2026-05-01 09:51:15.487846 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919101121227","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"@274753369702411 MAM, can we schedule a meeting to discuss the Incentive MIS Report and the process for uploading the Research Team\u2019s attendance in ERP?","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB0BC0F24826DCD1D392E_253137168376004@lid","created_at":"2026-05-01 15:21:15"}
+
+===== 2026-05-01 09:53:00.674067 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"let's align  it by 4p.m today .","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB06A3C78996EAF4524B7_274753369702411@lid","created_at":"2026-05-01 15:23:00"}
+
+===== 2026-05-01 09:55:52.922519 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919101121227","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"noted mam","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB07123E81C8ACD7B6990_253137168376004@lid","created_at":"2026-05-01 15:25:52"}
+
+===== 2026-05-01 09:59:38.716956 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363042473175767@g.us","is_group":true,"group_id":"120363042473175767@g.us","message":"https:\/\/meet.google.com\/rbs-zgtv-kop?authuser=1\nPls join at 4 .","message_type":"chat","wa_message_id":"false_120363042473175767@g.us_3EB05A4A7F0FAD4F2296D6_274753369702411@lid","created_at":"2026-05-01 15:29:38"}
+
+===== 2026-05-01 10:00:47.144987 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"pls share Nirmal task from 1st April to 1st may  with task status .","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0B337419C296EE1B7BF_274753369702411@lid","created_at":"2026-05-01 15:30:46"}
+
+===== 2026-05-01 10:01:41.566669 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Sure Mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0F0D7950719E553696C_112446689775859@lid","created_at":"2026-05-01 15:31:41"}
+
+===== 2026-05-01 10:03:01.049996 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"copy paste in same sheet , make separate TECH TEAM wise . \n 1st April to 1st may  with task status .\n1. Saurav\n2. Nirmal \n3. Devanshu \n4. Aman","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB08F0E1050FFF11C7CAF_274753369702411@lid","created_at":"2026-05-01 15:33:00"}
+
+===== 2026-05-01 10:03:20.028786 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"https:\/\/docs.google.com\/spreadsheets\/d\/1SdCZ5CUZ0lXeReNGNwydDMeWp1th7uMRU3tZVLVUQ8g\/edit?gid=0#gid=0","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0F129753B7B38845517_274753369702411@lid","created_at":"2026-05-01 15:33:19"}
+
+===== 2026-05-01 10:03:24.631120 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"in this sheet","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB023AB77F6A8B7192234_274753369702411@lid","created_at":"2026-05-01 15:33:24"}
+
+===== 2026-05-01 10:04:15.317506 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Sure Mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0400A45B8228E9C537F_112446689775859@lid","created_at":"2026-05-01 15:34:15"}
+
+===== 2026-05-01 10:05:55.678050 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Create task id for the same .","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB055DD7969C4EC2F350E_274753369702411@lid","created_at":"2026-05-01 15:35:55"}
+
+===== 2026-05-01 10:06:06.868033 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918506009177","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"then start working on it .","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB05189D5ADA28E29F390_274753369702411@lid","created_at":"2026-05-01 15:36:06"}
+
+===== 2026-05-01 10:07:08.134347 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Sure Mam","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0537C64CBBF8669F44A_112446689775859@lid","created_at":"2026-05-01 15:37:07"}
+
+===== 2026-05-01 10:07:59.243600 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918800004865","chat_jid":"918800004865@c.us","is_group":false,"group_id":null,"message":"Hello","message_type":"chat","wa_message_id":"false_918800004865@c.us_ACCAA38794DF4845B4C0EEF3EDAC08F4","created_at":"2026-05-01 15:37:59"}
+
+===== 2026-05-01 10:10:33.170584 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918077232009","chat_jid":"120363191289497457@g.us","is_group":true,"group_id":"120363191289497457@g.us","message":"Task id: 10257 TECH TEAM 1st April to 1st may with task status . Done","message_type":"chat","wa_message_id":"false_120363191289497457@g.us_3EB0BA2A6377163445AB83_112446689775859@lid","created_at":"2026-05-01 15:40:33"}
+
+===== 2026-05-01 10:11:24.937532 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"918800004865","chat_jid":"918800004865@c.us","is_group":false,"group_id":null,"message":"I need support for Borg","message_type":"chat","wa_message_id":"false_918800004865@c.us_AC4D4B1665267C3D62F60DD782B9567A","created_at":"2026-05-01 15:41:24"}
+
+===== 2026-05-01 10:14:54.890365 =====
+{"event":"incoming","instance_id":"d1b61aa6-fa28-4789-90bc-7614f27ff81c","from":"919179382686","chat_jid":"919179382686@c.us","is_group":false,"group_id":null,"message":"Hello I need help","message_type":"chat","wa_message_id":"false_919179382686@c.us_ACC33464CAE60E5CD82CA85A90DBA80D","created_at":"2026-05-01 15:44:54"}
